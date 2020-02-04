@@ -27,12 +27,12 @@ namespace Crazy_Checkers
             uint rowLength = 50;
 
             Button[,] BtnArray = new Button[colSize, rowSize];
-            TableLayoutPanel grid = new TableLayoutPanel();
+            // TableLayoutPanel grid = new TableLayoutPanel();
             // Adds Grid to Main form
-            Controls.Add(grid);
+            // Controls.Add(grid);
             // grid.SuspendLayout();
-            grid.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
-            grid.Dock = DockStyle.Fill;
+            // grid.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
+            // grid.Dock = DockStyle.Fill;
             grid.ColumnCount = Convert.ToInt32(colSize);
             grid.RowCount = Convert.ToInt32(rowSize);
 
@@ -66,11 +66,6 @@ namespace Crazy_Checkers
         {
             Button button = (Button)sender;
             Console.WriteLine("{0}\n", button.Name);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
