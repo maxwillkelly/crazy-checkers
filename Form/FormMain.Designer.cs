@@ -28,6 +28,7 @@ namespace Crazy_Checkers
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.TopPanelTable = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ImageRed32 = new System.Windows.Forms.PictureBox();
@@ -75,19 +76,23 @@ namespace Crazy_Checkers
             // 
             // ImageRed32
             // 
-            this.ImageRed32.Location = new System.Drawing.Point(506, 10);
-            this.ImageRed32.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ImageRed32.Image = ((System.Drawing.Image)(resources.GetObject("ImageRed32.Image")));
+            this.ImageRed32.Location = new System.Drawing.Point(509, 13);
+            this.ImageRed32.Margin = new System.Windows.Forms.Padding(0);
             this.ImageRed32.Name = "ImageRed32";
-            this.ImageRed32.Size = new System.Drawing.Size(36, 40);
+            this.ImageRed32.Size = new System.Drawing.Size(32, 32);
+            this.ImageRed32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ImageRed32.TabIndex = 5;
             this.ImageRed32.TabStop = false;
             // 
             // ImageBlack32
             // 
-            this.ImageBlack32.Location = new System.Drawing.Point(362, 10);
-            this.ImageBlack32.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ImageBlack32.Image = ((System.Drawing.Image)(resources.GetObject("ImageBlack32.Image")));
+            this.ImageBlack32.Location = new System.Drawing.Point(367, 14);
+            this.ImageBlack32.Margin = new System.Windows.Forms.Padding(0);
             this.ImageBlack32.Name = "ImageBlack32";
-            this.ImageBlack32.Size = new System.Drawing.Size(36, 40);
+            this.ImageBlack32.Size = new System.Drawing.Size(32, 32);
+            this.ImageBlack32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ImageBlack32.TabIndex = 4;
             this.ImageBlack32.TabStop = false;
             // 
