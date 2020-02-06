@@ -15,6 +15,7 @@ namespace Crazy_Checkers
 
         public uint Column { get; set; }
         public uint Row { get; set; }
+        public uint isKing { get; set; }
 
         public Position(uint col, uint row)
         {

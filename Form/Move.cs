@@ -7,6 +7,10 @@ namespace Crazy_Checkers
 {
     public class Move
     {
+        private Position current { get; set; }
+        private Position target { get; set; }
+        private Position taken { get; set; }
+
         public Position blackPosition { get; set; }
         public Position redPosition { get; set; }
 
@@ -20,6 +24,11 @@ namespace Crazy_Checkers
         {
             this.blackPosition = blackPosition;
             this.redPosition = redPosition;
+        }
+
+        public int ProcessMove(ref Position current, ref Position target)
+        {
+            throw new System.Exception("Not implemented");
         }
 
         public bool getNeighbour(string color)

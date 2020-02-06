@@ -10,10 +10,9 @@ namespace Crazy_Checkers
 {
     public class Grid : TableLayoutPanel
     {
-        uint colSize = 8;
-        uint rowSize = 8;
-
-        Position[,] PositionArray;
+        private uint colSize = 8;
+        private uint rowSize = 8;
+        private Position[,] PositionArray;
 
         public Grid()
         {
