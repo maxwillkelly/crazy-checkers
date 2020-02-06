@@ -29,6 +29,7 @@ namespace Crazy_Checkers
         private void MakeButton()
         {
             AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Dock = DockStyle.Fill;
             Margin = Padding.Empty;
             Padding = Padding.Empty;
