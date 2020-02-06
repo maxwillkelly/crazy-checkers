@@ -7,90 +7,90 @@ namespace Crazy_Checkers
 {
     public class Move
     {
-        public Piece blackPiece { get; set; }
-        public Piece redPiece { get; set; }
+        public Position blackPosition { get; set; }
+        public Position redPosition { get; set; }
 
         public Move()
         {
-            this.blackPiece = null;
-            this.redPiece = null;
+            this.blackPosition = null;
+            this.redPosition = null;
         }
 
-        public Move(Piece blackPiece, Piece redPiece)
+        public Move(Position blackPosition, Position redPosition)
         {
-            this.blackPiece = blackPiece;
-            this.redPiece = redPiece;
+            this.blackPosition = blackPosition;
+            this.redPosition = redPosition;
         }
 
         public bool getNeighbour(string color)
         {
             if (color == "Black")
             {
-                if ((blackPiece.Row - 1 == redPiece.Row) && (blackPiece.Column - 1 == redPiece.Column))
+                if ((blackPosition.Row - 1 == redPosition.Row) && (blackPosition.Column - 1 == redPosition.Column))
                     return true;
 
-                else if ((blackPiece.Row - 1 == redPiece.Row) && (blackPiece.Column + 1 == redPiece.Column))
+                else if ((blackPosition.Row - 1 == redPosition.Row) && (blackPosition.Column + 1 == redPosition.Column))
                     return true;
             }
 
             else if (color == "Red")
             {
-                if ((blackPiece.Row + 1 == redPiece.Row) && (blackPiece.Column - 1 == redPiece.Column))
+                if ((blackPosition.Row + 1 == redPosition.Row) && (blackPosition.Column - 1 == redPosition.Column))
                     return true;
 
-                else if ((blackPiece.Row + 1 == redPiece.Row) && (blackPiece.Column + 1 == redPiece.Column))
+                else if ((blackPosition.Row + 1 == redPosition.Row) && (blackPosition.Column + 1 == redPosition.Column))
                     return true;
             }
 
             else if (color == "King")
             {
-                if ((blackPiece.Row - 1 == redPiece.Row) && (blackPiece.Column - 1 == redPiece.Column))
+                if ((blackPosition.Row - 1 == redPosition.Row) && (blackPosition.Column - 1 == redPosition.Column))
                     return true;
 
-                else if ((blackPiece.Row - 1 == redPiece.Row) && (blackPiece.Column + 1 == redPiece.Column))
+                else if ((blackPosition.Row - 1 == redPosition.Row) && (blackPosition.Column + 1 == redPosition.Column))
                     return true;
 
-                else if ((blackPiece.Row + 1 == redPiece.Row) && (blackPiece.Column - 1 == redPiece.Column))
+                else if ((blackPosition.Row + 1 == redPosition.Row) && (blackPosition.Column - 1 == redPosition.Column))
                     return true;
 
-                else if ((blackPiece.Row + 1 == redPiece.Row) && (blackPiece.Column + 1 == redPiece.Column))
+                else if ((blackPosition.Row + 1 == redPosition.Row) && (blackPosition.Column + 1 == redPosition.Column))
                     return true;
             }
 
             return false;
         }
 
-        public Piece checkMove(string color)
+        public Position checkMove(string color)
         {
             if (color == "Black")
             {
-                if ((blackPiece.Row - 2 == redPiece.Row) && (blackPiece.Column - 2 == redPiece.Column))
-                    return new Piece(blackPiece.Row - 1, blackPiece.Column - 1);
+                if ((blackPosition.Row - 2 == redPosition.Row) && (blackPosition.Column - 2 == redPosition.Column))
+                    return new Position(blackPosition.Row - 1, blackPosition.Column - 1);
 
-                if ((blackPiece.Row - 2 == redPiece.Row) && (blackPiece.Column + 2 == redPiece.Column))
-                    return new Piece(blackPiece.Row - 1, blackPiece.Column + 1);
+                if ((blackPosition.Row - 2 == redPosition.Row) && (blackPosition.Column + 2 == redPosition.Column))
+                    return new Position(blackPosition.Row - 1, blackPosition.Column + 1);
             }
             if (color == "Red")
             {
-                if ((blackPiece.Row + 2 == redPiece.Row) && (blackPiece.Column - 2 == redPiece.Column))
-                    return new Piece(blackPiece.Row + 1, blackPiece.Column - 1);
+                if ((blackPosition.Row + 2 == redPosition.Row) && (blackPosition.Column - 2 == redPosition.Column))
+                    return new Position(blackPosition.Row + 1, blackPosition.Column - 1);
 
-                if ((blackPiece.Row + 2 == redPiece.Row) && (blackPiece.Column + 2 == redPiece.Column))
-                    return new Piece(blackPiece.Row + 1, blackPiece.Column + 1);
+                if ((blackPosition.Row + 2 == redPosition.Row) && (blackPosition.Column + 2 == redPosition.Column))
+                    return new Position(blackPosition.Row + 1, blackPosition.Column + 1);
             }
             if (color == "King")
             {
-                if ((blackPiece.Row - 2 == redPiece.Row) && (blackPiece.Column - 2 == redPiece.Column))
-                    return new Piece(blackPiece.Row - 1, blackPiece.Column - 1);
+                if ((blackPosition.Row - 2 == redPosition.Row) && (blackPosition.Column - 2 == redPosition.Column))
+                    return new Position(blackPosition.Row - 1, blackPosition.Column - 1);
 
-                if ((blackPiece.Row - 2 == redPiece.Row) && (blackPiece.Column + 2 == redPiece.Column))
-                    return new Piece(blackPiece.Row - 1, blackPiece.Column + 1);
+                if ((blackPosition.Row - 2 == redPosition.Row) && (blackPosition.Column + 2 == redPosition.Column))
+                    return new Position(blackPosition.Row - 1, blackPosition.Column + 1);
 
-                if ((blackPiece.Row + 2 == redPiece.Row) && (blackPiece.Column - 2 == redPiece.Column))
-                    return new Piece(blackPiece.Row + 1, blackPiece.Column - 1);
+                if ((blackPosition.Row + 2 == redPosition.Row) && (blackPosition.Column - 2 == redPosition.Column))
+                    return new Position(blackPosition.Row + 1, blackPosition.Column - 1);
                     
-                if ((blackPiece.Row + 2 == redPiece.Row) && (blackPiece.Column + 2 == redPiece.Column))
-                    return new Piece(blackPiece.Row + 1, blackPiece.Column + 1);
+                if ((blackPosition.Row + 2 == redPosition.Row) && (blackPosition.Column + 2 == redPosition.Column))
+                    return new Position(blackPosition.Row + 1, blackPosition.Column + 1);
             }
 
             return null;
@@ -109,7 +109,7 @@ namespace Crazy_Checkers
                 return false;
             }
 
-            return blackPiece.Equals(move.blackPiece) && redPiece.Equals(move.redPiece);
+            return blackPosition.Equals(move.blackPosition) && redPosition.Equals(move.redPosition);
         }
     }
 }
