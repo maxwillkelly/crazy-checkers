@@ -4,10 +4,7 @@ namespace Crazy_Checkers {
 		public FormMenu() {
 			throw new System.Exception("Not implemented");
 		}
-
-		private Program program;
 		private FormMain formMain;
-
 	}
 
 }
