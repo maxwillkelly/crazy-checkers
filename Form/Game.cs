@@ -3,15 +3,34 @@ namespace Crazy_Checkers {
 	public class Game {
 		private Grid grid;
 
-        private FormSettings formSettings;
-        private FormAbout formAbout;
-        private Player[,] player;
+		// change turn
+		// validate winning move
+		// 
+		private bool playersTurn = false;
+		private bool gameOver = false;
+		
+		private FormSettings formSettings;
+		private FormAbout formAbout;
+		private Player[] players;
 
 		public void Play() {
-			throw new System.Exception("Not implemented");
+			while (!gameOver) {
+				// check if gameOver
+				// do this, by checking all valid moves and/or player is out of positions
+				if (players[0].Turn()) {
+					playersTurn = !playersTurn; 
+				}
+			}
 		}
-		public Game() {
-			throw new System.Exception("Not implemented");
+		public Game()
+		{
+			Grid grid = new Grid();
+			players = new Player[2];
+			for (int i = 0; i < players.Length; i++)
+			{
+				players[i] = new Player();		
+				Console.WriteLine("Player " + (i + 1) + ": " + players[i].Score);
+			}
 		}
 	}
 }
