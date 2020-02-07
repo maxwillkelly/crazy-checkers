@@ -38,7 +38,6 @@ namespace Crazy_Checkers
             Padding = Padding.Empty;
             TabIndex = 0;
             UseVisualStyleBackColor = true;
-            BackColor = SystemColors.Control;
         }
 
         public override bool Equals(System.Object obj)

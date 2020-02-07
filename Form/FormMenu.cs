@@ -24,25 +24,28 @@ namespace Crazy_Checkers
 
         private void Btn1Player_Click(object sender, EventArgs e)
         {
-            Close();
+            Hide();
             game.Play();
+            Show();
         }
 
         private void Btn2Player_Click(object sender, EventArgs e)
         {
-            Close();
+            Hide();
             game.Play();
+            Show();
         }
 
         private void BtnLoad_Click(object sender, EventArgs e)
         {
-            throw new Exception("Not implemented");
+            MessageBox.Show("The Load/Save features of Crazy Checkers are not yet implemented");
         }
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-            Close();
+            Hide();
             game.ShowSettings();
+            Show();
         }
     }
 }

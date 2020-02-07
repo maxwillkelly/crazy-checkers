@@ -1,4 +1,6 @@
 using System;
+using System.Windows.Forms;
+
 namespace Crazy_Checkers {
 
 	/*
@@ -33,22 +35,20 @@ namespace Crazy_Checkers {
 
 		public void Play() {
 			// Displays the main form
-			formMain.Show();
+			formMain.ShowDialog();
 			// Repeats until the game has finished
-			while (!gameOver) {
+			/*while (!gameOver) {
 				// check if gameOver
 				// do this, by checking all valid moves and/or player is out of positions
 				if (players[0].Turn()) {
 					playersTurn = !playersTurn; 
 				}
-			}
+			}*/
 		}
 
 		// Shows the settings form
 		public void ShowSettings()
 		{
-			// Closes the main form
-			formMain.Close();
 			// Opens the settings form
 			formSettings.Show();
 		}
