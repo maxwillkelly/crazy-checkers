@@ -12,9 +12,13 @@ namespace Crazy_Checkers
 {
     public partial class FormMenu : Form
     {
+        private uint cols = 4;
+        private uint rows = 4;
+
         public FormMenu()
         {
             InitializeComponent();
+            Game game = new Game();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Crazy_Checkers
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             AutoSize = true;
             Dock = DockStyle.Fill;
-            Name = "grid";
+            Name = "Grid";
             Location = new Point(0, 50);
             Margin = new Padding(0);
             Size = new Size(512, 512);
