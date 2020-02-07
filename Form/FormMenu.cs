@@ -24,21 +24,24 @@ namespace Crazy_Checkers
 
         private void Btn1Player_Click(object sender, EventArgs e)
         {
+            Close();
             game.Play();
         }
 
         private void Btn2Player_Click(object sender, EventArgs e)
         {
+            Close();
             game.Play();
         }
 
         private void BtnLoad_Click(object sender, EventArgs e)
         {
-            throw new System.Exception("Not implemented");
+            throw new Exception("Not implemented");
         }
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
+            Close();
             game.ShowSettings();
         }
     }
