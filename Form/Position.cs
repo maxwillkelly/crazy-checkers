@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,12 +17,14 @@ namespace Crazy_Checkers
         public uint Column { get; set; }
         public uint Row { get; set; }
         public uint isKing { get; set; }
+        public string Color;
 
-        public Position(uint col, uint row)
+        public Position(uint col, uint row, string color)
         {
             Column = col;
             Row = row;
             MakeButton();
+            Color = color;
             // Names button based on location
             Name = "Btn_" + col + "_" + row;
         }
@@ -35,6 +38,7 @@ namespace Crazy_Checkers
             Padding = Padding.Empty;
             TabIndex = 0;
             UseVisualStyleBackColor = true;
+            BackColor = SystemColors.Control;
         }
 
         public override bool Equals(System.Object obj)
@@ -43,7 +47,7 @@ namespace Crazy_Checkers
             {
                 return false;
             }
-
+            
             Position Position = obj as Position;
             
             if ((System.Object)Position == null)
@@ -52,6 +56,14 @@ namespace Crazy_Checkers
             }
 
             return Row == Position.Row && Column == Position.Column;
+        }
+
+        public void setState(int newState) {
+            
+        }
+
+        public string getState() {
+            return Color;
         }
     }
 }

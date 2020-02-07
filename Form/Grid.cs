@@ -14,6 +14,16 @@ namespace Crazy_Checkers
         private uint rowSize = 8;
         private Position[,] PositionArray;
 
+        /* COMMENTS AREA
+        We need to:
+            - set up a way to get the state of a piece selected
+            - set up a way to set the state of a piece
+
+        We have done:
+            -     
+        
+        */
+
         public Grid()
         {
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -49,8 +59,9 @@ namespace Crazy_Checkers
                     // Places button in array
                     Position btn = PositionArray[col, row];
                     // Creates button
-                    btn = new Position(col, row);
+                    btn = new Position(col, row, "black");
                     // Adds button to Main form
+                    btn.BackColor = Color.Black;
                     Controls.Add(btn, Convert.ToInt32(col), Convert.ToInt32(row));
                     btn.Click += new EventHandler(BtnClick);
                 }
