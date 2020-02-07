@@ -115,6 +115,7 @@ namespace Crazy_Checkers
             this.BtnAbout.TabIndex = 2;
             this.BtnAbout.Text = "About";
             this.BtnAbout.UseVisualStyleBackColor = true;
+            this.BtnAbout.Click += new System.EventHandler(this.BtnAbout_Click);
             // 
             // ScoreRed
             // 

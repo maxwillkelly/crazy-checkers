@@ -20,5 +20,10 @@ namespace Crazy_Checkers
             MainGrid = new Grid();
             TopPanelTable.Controls.Add(MainGrid, 0, 1);
         }
+
+        private void BtnAbout_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
