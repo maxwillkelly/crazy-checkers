@@ -14,11 +14,32 @@ namespace Crazy_Checkers
     {
         private uint cols = 4;
         private uint rows = 4;
+        private Game game;
 
         public FormMenu()
         {
             InitializeComponent();
-            Game game = new Game();
+            game = new Game();
+        }
+
+        private void Btn1Player_Click(object sender, EventArgs e)
+        {
+            game.Play();
+        }
+
+        private void Btn2Player_Click(object sender, EventArgs e)
+        {
+            game.Play();
+        }
+
+        private void BtnLoad_Click(object sender, EventArgs e)
+        {
+            throw new System.Exception("Not implemented");
+        }
+
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            game.ShowSettings();
         }
     }
 }
