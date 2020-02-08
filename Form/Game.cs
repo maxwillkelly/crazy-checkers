@@ -12,16 +12,18 @@ namespace Crazy_Checkers {
 		// 
 		private bool playersTurn = false;
 		private bool gameOver = false;
+		private uint colSize = 8;
+		private uint rowSize = 8;
 		public Grid MainGrid { get; set; }
 		private Player[] players;
 
 		public Game()
 		{
-			MainGrid = new Grid();
+			MainGrid = new Grid(colSize, rowSize);
 			players = new Player[2];
 			for (int i = 0; i < players.Length; i++)
 			{
-				players[i] = new Player();
+				players[i] = new Player(colSize, rowSize);
 				Console.WriteLine("Player " + (i + 1) + ": " + players[i].Score);
 			}
 		}
