@@ -17,9 +17,10 @@ namespace Crazy_Checkers
         public uint Column { get; set; }
         public uint Row { get; set; }
         public uint isKing { get; set; }
-        public string Color;
+        // 0 indicates back, 1 indicates red
+        public uint Color { get; set; }
 
-        public Position(uint col, uint row, string color)
+        public Position(uint col, uint row, uint color)
         {
             Column = col;
             Row = row;
@@ -37,7 +38,7 @@ namespace Crazy_Checkers
             Margin = Padding.Empty;
             Padding = Padding.Empty;
             TabIndex = 0;
-            UseVisualStyleBackColor = true;
+            //UseVisualStyleBackColor = true;
         }
 
         public override bool Equals(System.Object obj)
@@ -55,14 +56,6 @@ namespace Crazy_Checkers
             }
 
             return Row == Position.Row && Column == Position.Column;
-        }
-
-        public void setState(int newState) {
-            
-        }
-
-        public string getState() {
-            return Color;
         }
     }
 }

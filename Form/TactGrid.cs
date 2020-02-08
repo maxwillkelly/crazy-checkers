@@ -6,11 +6,32 @@ using System.Threading.Tasks;
 
 namespace Crazy_Checkers
 {
-    class TactGrid
+    public class TactGrid
     {
-        TactGrid()
-        {
+        private uint Columns = 8;
+        private uint Rows = 8;
+        private bool[,] validMove;
 
+        public TactGrid()
+        {
+            validMove = new bool[Columns, Rows];
+        }
+
+        public TactGrid(uint Columns, uint Rows)
+        {
+            this.Columns = Columns;
+            this.Rows = Rows;
+            validMove = new bool[Columns, Rows];
+        }
+
+        public bool getSquare(uint col, uint row)
+        {
+            return validMove[col, row];
+        }
+
+        public void setSquare(uint col, uint row, bool valid)
+        {
+            validMove[col,row] = valid;
         }
     }
 }

@@ -12,18 +12,33 @@ namespace Crazy_Checkers
 {
     public partial class FormMain : Form
     {
-        Grid MainGrid;
+        Game game;
+        FormAbout formAbout;
+        FormSettings formSettings;
 
         public FormMain()
         {
             InitializeComponent();
-            MainGrid = new Grid();
-            TopPanelTable.Controls.Add(MainGrid, 0, 1);
+            game = new Game();
+            formAbout = new FormAbout();
+            formSettings = new FormSettings();
+            TopPanelTable.Controls.Add(game.MainGrid, 0, 1);
+        }
+
+        public void StartGame()
+        {
+            game.Play();
         }
 
         private void BtnAbout_Click(object sender, EventArgs e)
         {
-            
+            formAbout.Show();
+        }
+
+        public void BtnSettings_Click(object sender, EventArgs e)
+        {
+            formSettings.Show();
+            game.SetSettings(ref formSettings);
         }
     }
 }

@@ -10,8 +10,6 @@ namespace Crazy_Checkers
 {
     public class Grid : TableLayoutPanel
     {
-        private uint colSize = 8;
-        private uint rowSize = 8;
         private Position[,] PositionArray;
 
         /* COMMENTS AREA
@@ -24,7 +22,7 @@ namespace Crazy_Checkers
         
         */
 
-        public Grid()
+        public Grid(uint colSize, uint rowSize)
         {
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             AutoSize = true;
@@ -52,14 +50,14 @@ namespace Crazy_Checkers
 
         private void CreateBtnGrid()
         {
-            for (uint col = 0; col < colSize; col++)
+            for (uint col = 0; col < ColumnCount; col++)
             {
-                for (uint row = 0; row < rowSize; row++)
+                for (uint row = 0; row < RowCount; row++)
                 {
                     // Places button in array
                     Position btn = PositionArray[col, row];
                     // Creates button
-                    btn = new Position(col, row, "black");
+                    btn = new Position(col, row, 0);
                     // Adds button to Main form
                     btn.BackColor = Color.Black;
                     Controls.Add(btn, Convert.ToInt32(col), Convert.ToInt32(row));

@@ -12,45 +12,35 @@ namespace Crazy_Checkers {
 		// 
 		private bool playersTurn = false;
 		private bool gameOver = false;
-
-		private FormMain formMain;
-		private FormSettings formSettings;
-		private FormAbout formAbout;
+		private uint colSize = 8;
+		private uint rowSize = 8;
+		public Grid MainGrid { get; set; }
 		private Player[] players;
 
 		public Game()
 		{
-			// Initalises the forms
-			formAbout = new FormAbout();
-			formMain = new FormMain();
-			formSettings = new FormSettings();
-
+			MainGrid = new Grid(colSize, rowSize);
 			players = new Player[2];
 			for (int i = 0; i < players.Length; i++)
 			{
-				players[i] = new Player();
+				players[i] = new Player(colSize, rowSize);
 				Console.WriteLine("Player " + (i + 1) + ": " + players[i].Score);
 			}
 		}
 
 		public void Play() {
-			// Displays the main form
-			formMain.ShowDialog();
-			// Repeats until the game has finished
-			/*while (!gameOver) {
+			if (!gameOver) {
 				// check if gameOver
 				// do this, by checking all valid moves and/or player is out of positions
 				if (players[0].Turn()) {
 					playersTurn = !playersTurn; 
 				}
-			}*/
+			}
 		}
 
-		// Shows the settings form
-		public void ShowSettings()
+		public void SetSettings(ref FormSettings formSettings)
 		{
-			// Opens the settings form
-			formSettings.Show();
+
 		}
 	}
 }
