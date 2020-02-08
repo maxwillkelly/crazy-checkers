@@ -12,8 +12,6 @@ namespace Crazy_Checkers
 {
     public partial class FormMenu : Form
     {
-        private uint cols = 4;
-        private uint rows = 4;
         private FormMain formMain;
 
         public FormMenu()

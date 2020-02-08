@@ -27,14 +27,13 @@ namespace Crazy_Checkers {
 		}
 
 		public void Play() {
-			// Repeats until the game has finished
-			/*while (!gameOver) {
+			if (!gameOver) {
 				// check if gameOver
 				// do this, by checking all valid moves and/or player is out of positions
 				if (players[0].Turn()) {
 					playersTurn = !playersTurn; 
 				}
-			}*/
+			}
 		}
 
 		public void SetSettings(ref FormSettings formSettings)

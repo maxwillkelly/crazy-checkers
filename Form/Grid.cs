@@ -59,7 +59,7 @@ namespace Crazy_Checkers
                     // Places button in array
                     Position btn = PositionArray[col, row];
                     // Creates button
-                    btn = new Position(col, row, "black");
+                    btn = new Position(col, row, 0);
                     // Adds button to Main form
                     btn.BackColor = Color.Black;
                     Controls.Add(btn, Convert.ToInt32(col), Convert.ToInt32(row));
