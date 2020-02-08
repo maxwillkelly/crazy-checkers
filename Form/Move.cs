@@ -31,9 +31,9 @@ namespace Crazy_Checkers
             throw new System.Exception("Not implemented");
         }
 
-        public bool GetNeighbour(string color)
+        public bool GetNeighbour(uint color)
         {
-            if (color == "Black")
+            if (color == 0)
             {
                 if ((BlackPosition.Row - 1 == RedPosition.Row) && (BlackPosition.Column - 1 == RedPosition.Column))
                     return true;
@@ -42,7 +42,7 @@ namespace Crazy_Checkers
                     return true;
             }
 
-            else if (color == "Red")
+            else if (color == 1)
             {
                 if ((BlackPosition.Row + 1 == RedPosition.Row) && (BlackPosition.Column - 1 == RedPosition.Column))
                     return true;
@@ -51,7 +51,7 @@ namespace Crazy_Checkers
                     return true;
             }
 
-            else if (color == "King")
+            else if (color == 2)
             {
                 if ((BlackPosition.Row - 1 == RedPosition.Row) && (BlackPosition.Column - 1 == RedPosition.Column))
                     return true;
@@ -69,9 +69,9 @@ namespace Crazy_Checkers
             return false;
         }
 
-        public Position CheckMove(string color)
+        public Position CheckMove(uint color)
         {
-            if (color == "Black")
+            if (color == 0)
             {
                 if ((BlackPosition.Row - 2 == RedPosition.Row) && (BlackPosition.Column - 2 == RedPosition.Column))
                     return new Position(BlackPosition.Row - 1, BlackPosition.Column - 1, color);
@@ -80,7 +80,7 @@ namespace Crazy_Checkers
                     return new Position(BlackPosition.Row - 1, BlackPosition.Column + 1, color);
             }
             
-            else if (color == "Red")
+            else if (color == 1)
             {
                 if ((BlackPosition.Row + 2 == RedPosition.Row) && (BlackPosition.Column - 2 == RedPosition.Column))
                     return new Position(BlackPosition.Row + 1, BlackPosition.Column - 1, color);
@@ -89,7 +89,7 @@ namespace Crazy_Checkers
                     return new Position(BlackPosition.Row + 1, BlackPosition.Column + 1, color);
             }
             
-            else if (color == "King")
+            else if (color == 2)
             {
                 if ((BlackPosition.Row - 2 == RedPosition.Row) && (BlackPosition.Column - 2 == RedPosition.Column))
                     return new Position(BlackPosition.Row - 1, BlackPosition.Column - 1, color);
@@ -124,14 +124,14 @@ namespace Crazy_Checkers
         }
         
         // The method is current outside the class
-        public List<Move> checkJumps(string color)
+        public List<Move> checkJumps(uint color)
         {
             List<Move> jumps = new List<Move>();
             for (uint r = 0; r < 8; r++)
             {
                 for (uint c = 0; c < 8; c++)
                 {
-                    if (color == "Black")
+                    if (color == 0)
                     {
                         if (getState(r, c) == 4)
                         {
@@ -170,7 +170,7 @@ namespace Crazy_Checkers
                         }
                     }
 
-                    else if (color == "Red")
+                    else if (color == 1)
                     {
                         if (getState(r, c) == 3)
                         {
