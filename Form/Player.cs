@@ -7,8 +7,9 @@ namespace Crazy_Checkers {
 		private TactGrid tactGrid;
 		private Stack<Move> moves;
 		
-		public Player()
+		public Player(uint cols, uint rows)
 		{
+			tactGrid = new TactGrid(cols, rows);
 			Score = 10;
 		}
 
