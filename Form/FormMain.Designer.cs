@@ -51,12 +51,11 @@ namespace Crazy_Checkers
             this.TopPanelTable.Controls.Add(this.panel1, 0, 0);
             this.TopPanelTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TopPanelTable.Location = new System.Drawing.Point(0, 0);
-            this.TopPanelTable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TopPanelTable.Name = "TopPanelTable";
             this.TopPanelTable.RowCount = 2;
-            this.TopPanelTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.TopPanelTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.TopPanelTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TopPanelTable.Size = new System.Drawing.Size(900, 658);
+            this.TopPanelTable.Size = new System.Drawing.Size(800, 526);
             this.TopPanelTable.TabIndex = 2;
             // 
             // panel1
@@ -71,16 +70,16 @@ namespace Crazy_Checkers
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(900, 62);
+            this.panel1.Size = new System.Drawing.Size(800, 50);
             this.panel1.TabIndex = 2;
             // 
             // ImageRed32
             // 
             this.ImageRed32.Image = ((System.Drawing.Image)(resources.GetObject("ImageRed32.Image")));
-            this.ImageRed32.Location = new System.Drawing.Point(509, 13);
+            this.ImageRed32.Location = new System.Drawing.Point(452, 10);
             this.ImageRed32.Margin = new System.Windows.Forms.Padding(0);
             this.ImageRed32.Name = "ImageRed32";
-            this.ImageRed32.Size = new System.Drawing.Size(32, 32);
+            this.ImageRed32.Size = new System.Drawing.Size(28, 26);
             this.ImageRed32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ImageRed32.TabIndex = 5;
             this.ImageRed32.TabStop = false;
@@ -88,30 +87,29 @@ namespace Crazy_Checkers
             // ImageBlack32
             // 
             this.ImageBlack32.Image = ((System.Drawing.Image)(resources.GetObject("ImageBlack32.Image")));
-            this.ImageBlack32.Location = new System.Drawing.Point(367, 14);
+            this.ImageBlack32.Location = new System.Drawing.Point(326, 11);
             this.ImageBlack32.Margin = new System.Windows.Forms.Padding(0);
             this.ImageBlack32.Name = "ImageBlack32";
-            this.ImageBlack32.Size = new System.Drawing.Size(32, 32);
+            this.ImageBlack32.Size = new System.Drawing.Size(28, 26);
             this.ImageBlack32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ImageBlack32.TabIndex = 4;
             this.ImageBlack32.TabStop = false;
             // 
             // BtnSettings
             // 
-            this.BtnSettings.Location = new System.Drawing.Point(101, 10);
-            this.BtnSettings.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BtnSettings.Location = new System.Drawing.Point(90, 8);
             this.BtnSettings.Name = "BtnSettings";
-            this.BtnSettings.Size = new System.Drawing.Size(84, 42);
+            this.BtnSettings.Size = new System.Drawing.Size(75, 34);
             this.BtnSettings.TabIndex = 3;
             this.BtnSettings.Text = "Settings";
             this.BtnSettings.UseVisualStyleBackColor = true;
+            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // BtnAbout
             // 
-            this.BtnAbout.Location = new System.Drawing.Point(10, 10);
-            this.BtnAbout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BtnAbout.Location = new System.Drawing.Point(9, 8);
             this.BtnAbout.Name = "BtnAbout";
-            this.BtnAbout.Size = new System.Drawing.Size(84, 42);
+            this.BtnAbout.Size = new System.Drawing.Size(75, 34);
             this.BtnAbout.TabIndex = 2;
             this.BtnAbout.Text = "About";
             this.BtnAbout.UseVisualStyleBackColor = true;
@@ -121,9 +119,9 @@ namespace Crazy_Checkers
             // 
             this.ScoreRed.AutoSize = true;
             this.ScoreRed.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScoreRed.Location = new System.Drawing.Point(456, 14);
+            this.ScoreRed.Location = new System.Drawing.Point(405, 11);
             this.ScoreRed.Name = "ScoreRed";
-            this.ScoreRed.Size = new System.Drawing.Size(47, 32);
+            this.ScoreRed.Size = new System.Drawing.Size(39, 29);
             this.ScoreRed.TabIndex = 1;
             this.ScoreRed.Text = "00";
             // 
@@ -131,19 +129,18 @@ namespace Crazy_Checkers
             // 
             this.ScoreBlack.AutoSize = true;
             this.ScoreBlack.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScoreBlack.Location = new System.Drawing.Point(405, 14);
+            this.ScoreBlack.Location = new System.Drawing.Point(360, 11);
             this.ScoreBlack.Name = "ScoreBlack";
-            this.ScoreBlack.Size = new System.Drawing.Size(47, 32);
+            this.ScoreBlack.Size = new System.Drawing.Size(39, 29);
             this.ScoreBlack.TabIndex = 0;
             this.ScoreBlack.Text = "00";
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 658);
+            this.ClientSize = new System.Drawing.Size(800, 526);
             this.Controls.Add(this.TopPanelTable);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormMain";
             this.Text = "Crazy Checkers";
             this.TopPanelTable.ResumeLayout(false);

@@ -14,26 +14,24 @@ namespace Crazy_Checkers
     {
         private uint cols = 4;
         private uint rows = 4;
-        private Game game;
+        private FormMain formMain;
 
         public FormMenu()
         {
             InitializeComponent();
-            game = new Game();
+            formMain = new FormMain();
         }
 
         private void Btn1Player_Click(object sender, EventArgs e)
         {
             Hide();
-            game.Play();
-            Show();
+            formMain.Show();
         }
 
         private void Btn2Player_Click(object sender, EventArgs e)
         {
             Hide();
-            game.Play();
-            Show();
+            formMain.Show();
         }
 
         private void BtnLoad_Click(object sender, EventArgs e)
@@ -43,9 +41,7 @@ namespace Crazy_Checkers
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-            Hide();
-            game.ShowSettings();
-            Show();
+            formMain.BtnSettings_Click(sender, e);
         }
     }
 }

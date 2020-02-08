@@ -12,19 +12,12 @@ namespace Crazy_Checkers {
 		// 
 		private bool playersTurn = false;
 		private bool gameOver = false;
-
-		private FormMain formMain;
-		private FormSettings formSettings;
-		private FormAbout formAbout;
+		public Grid MainGrid { get; set; }
 		private Player[] players;
 
 		public Game()
 		{
-			// Initalises the forms
-			formAbout = new FormAbout();
-			formMain = new FormMain();
-			formSettings = new FormSettings();
-
+			MainGrid = new Grid();
 			players = new Player[2];
 			for (int i = 0; i < players.Length; i++)
 			{
@@ -34,8 +27,6 @@ namespace Crazy_Checkers {
 		}
 
 		public void Play() {
-			// Displays the main form
-			formMain.ShowDialog();
 			// Repeats until the game has finished
 			/*while (!gameOver) {
 				// check if gameOver
@@ -46,11 +37,9 @@ namespace Crazy_Checkers {
 			}*/
 		}
 
-		// Shows the settings form
-		public void ShowSettings()
+		public void SetSettings(ref FormSettings formSettings)
 		{
-			// Opens the settings form
-			formSettings.Show();
+
 		}
 	}
 }
