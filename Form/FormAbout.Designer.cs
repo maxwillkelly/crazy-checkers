@@ -139,8 +139,8 @@
             this.textBoxDescription.Size = new System.Drawing.Size(361, 155);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
-            this.textBoxDescription.Text = "Authors: Max Kelly, Mohammed Ubaid Tokaria and Ramsay Sewell \r\n\r\nLoad Icon: Icon " +
-    "made by Smashicons on www.flaticon.com \r\n";
+            this.textBoxDescription.Text = "Authors: Max Kelly, Mohammed Ubaid Tokaria and Ramsay Sewell \r\n\r\nIcons made by Sm" +
+    "ashicons on www.flaticon.com \r\n";
             // 
             // okButton
             // 
