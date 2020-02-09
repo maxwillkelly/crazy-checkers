@@ -19,6 +19,7 @@ namespace Crazy_Checkers {
 
 		// Main Grid
 		public Grid MainGrid { get; set; }
+
 		// Players
 		private Player[] players;
 
@@ -56,7 +57,6 @@ namespace Crazy_Checkers {
 			string[] btnString = button.Name.Split('_');
 			uint col = Convert.ToUInt32(btnString[1]);
 			uint row = Convert.ToUInt32(btnString[2]);
-			Console.WriteLine("{0}\tCol: {1}\tRow: {2}\n", button.Name, col, row);
 
 			// Add to this method to specify what happens when a button is clicked
 		}

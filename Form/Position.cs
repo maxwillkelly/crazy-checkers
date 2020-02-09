@@ -16,8 +16,8 @@ namespace Crazy_Checkers
 
         public uint Column { get; set; }
         public uint Row { get; set; }
-        public uint isKing { get; set; }
-        // 0 indicates back, 1 indicates red
+        public bool isKing { get; set; }
+        // 0 indicates back, 1 indicates red, 2 indicates blank
         public uint Color { get; set; }
 
         public Position(uint col, uint row, uint color)
@@ -26,6 +26,7 @@ namespace Crazy_Checkers
             Row = row;
             MakeButton();
             Color = color;
+            isKing = false;
             // Names button based on location
             Name = "Btn_" + col + "_" + row;
         }

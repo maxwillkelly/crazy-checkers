@@ -78,12 +78,37 @@ namespace Crazy_Checkers
                     // Places button in array
                     Position btn = PositionArray[col, row];
                     // Creates button
-                    btn = new Position(col, row, 0);
+                    btn = new Position(col, row, 2);
                     // Adds button to Main form
                     Controls.Add(btn, Convert.ToInt32(col), Convert.ToInt32(row));
                     // Adds button event handler
                     btn.Click += new EventHandler(BtnClick);
                 }
+            }
+        }
+
+        // Returns a reference to a position
+        public ref Position GetPosition(uint col, uint row)
+        {
+            return ref PositionArray[col,row];
+        }
+
+        // Can be used to set all values of a position
+        public void SetPosition(uint col, uint row, uint color, bool isKing)
+        {
+            // Checks for invalid dimensions
+            if (col >= ColumnCount || row >= RowCount)
+            {
+                throw new Exception("A position was attempted to be set outside of the current dimensions");
+            }
+            // Checks for invalid color
+            else if (color > 2)
+            {
+                throw new Exception("A position was attempted to be set with an invalid colour");
+            }
+            else
+            {
+                PositionArray[col,row].Color = color;
             }
         }
 
