@@ -30,7 +30,7 @@ namespace Crazy_Checkers
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.TopPanelTable = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.topPanel = new System.Windows.Forms.Panel();
             this.ImageRed32 = new System.Windows.Forms.PictureBox();
             this.ImageBlack32 = new System.Windows.Forms.PictureBox();
             this.BtnSettings = new System.Windows.Forms.Button();
@@ -38,7 +38,7 @@ namespace Crazy_Checkers
             this.ScoreRed = new System.Windows.Forms.Label();
             this.ScoreBlack = new System.Windows.Forms.Label();
             this.TopPanelTable.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageRed32)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageBlack32)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +48,7 @@ namespace Crazy_Checkers
             this.TopPanelTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.TopPanelTable.ColumnCount = 1;
             this.TopPanelTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TopPanelTable.Controls.Add(this.panel1, 0, 0);
+            this.TopPanelTable.Controls.Add(this.topPanel, 0, 0);
             this.TopPanelTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TopPanelTable.Location = new System.Drawing.Point(0, 0);
             this.TopPanelTable.Name = "TopPanelTable";
@@ -58,20 +58,20 @@ namespace Crazy_Checkers
             this.TopPanelTable.Size = new System.Drawing.Size(800, 526);
             this.TopPanelTable.TabIndex = 2;
             // 
-            // panel1
+            // topPanel
             // 
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.Controls.Add(this.ImageRed32);
-            this.panel1.Controls.Add(this.ImageBlack32);
-            this.panel1.Controls.Add(this.BtnSettings);
-            this.panel1.Controls.Add(this.BtnAbout);
-            this.panel1.Controls.Add(this.ScoreRed);
-            this.panel1.Controls.Add(this.ScoreBlack);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 50);
-            this.panel1.TabIndex = 2;
+            this.topPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.topPanel.Controls.Add(this.ImageRed32);
+            this.topPanel.Controls.Add(this.ImageBlack32);
+            this.topPanel.Controls.Add(this.BtnSettings);
+            this.topPanel.Controls.Add(this.BtnAbout);
+            this.topPanel.Controls.Add(this.ScoreRed);
+            this.topPanel.Controls.Add(this.ScoreBlack);
+            this.topPanel.Location = new System.Drawing.Point(0, 0);
+            this.topPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.topPanel.Name = "topPanel";
+            this.topPanel.Size = new System.Drawing.Size(800, 50);
+            this.topPanel.TabIndex = 2;
             // 
             // ImageRed32
             // 
@@ -141,12 +141,14 @@ namespace Crazy_Checkers
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 526);
             this.Controls.Add(this.TopPanelTable);
+            this.MaximumSize = new System.Drawing.Size(818, 573);
+            this.MinimumSize = new System.Drawing.Size(818, 573);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crazy Checkers";
             this.TopPanelTable.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.topPanel.ResumeLayout(false);
+            this.topPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageRed32)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageBlack32)).EndInit();
             this.ResumeLayout(false);
@@ -154,9 +156,8 @@ namespace Crazy_Checkers
         }
 
         #endregion
-        private System.Windows.Forms.TableLayoutPanel grid;
         private System.Windows.Forms.TableLayoutPanel TopPanelTable;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Button BtnSettings;
         private System.Windows.Forms.Button BtnAbout;
         private System.Windows.Forms.Label ScoreRed;

@@ -12,14 +12,25 @@ namespace Crazy_Checkers {
 		// 
 		private bool playersTurn = false;
 		private bool gameOver = false;
+
+		// Grid Dimensions
 		private uint colSize = 8;
 		private uint rowSize = 8;
+
+		// Main Grid
 		public Grid MainGrid { get; set; }
+		// Players
 		private Player[] players;
+
+		// Settings
+		private int ruleSet;
+		private int gridSize;
+		private bool sound;
 
 		public Game()
 		{
 			MainGrid = new Grid(colSize, rowSize);
+			MainGrid.BtnEventHandler += processBtn;
 			players = new Player[2];
 			for (int i = 0; i < players.Length; i++)
 			{
@@ -38,9 +49,23 @@ namespace Crazy_Checkers {
 			}
 		}
 
+		// Runs when a position is clicked in the grid
+		public void processBtn(object sender, EventArgs e)
+		{
+			Button button = (Button)sender;
+			string[] btnString = button.Name.Split('_');
+			uint col = Convert.ToUInt32(btnString[1]);
+			uint row = Convert.ToUInt32(btnString[2]);
+			Console.WriteLine("{0}\tCol: {1}\tRow: {2}\n", button.Name, col, row);
+
+			// Add to this method to specify what happens when a button is clicked
+		}
+
 		public void SetSettings(ref FormSettings formSettings)
 		{
-
+			ruleSet = formSettings.ruleSet;
+			gridSize = formSettings.gridSize;
+			sound = formSettings.sound;
 		}
 	}
 }
