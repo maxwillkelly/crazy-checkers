@@ -21,5 +21,20 @@ namespace Crazy_Checkers {
 			// then -----> return true
 			return true;
 		}
+
+		public void pushMove(Move move)
+		{
+			moves.Push(move);
+
+			// yo, when should we be calling "processMove" or "processValidPositions"
+			// there's a method in Game that occurs when a button is clicked
+			// Well for ^ yeah I just put it there, it's so the game can do what it wants with this info
+			// okay no problem,
+		}
+
+		public Move popMove()
+		{
+			return moves.Pop();
+		}
 	}
 }

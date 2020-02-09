@@ -48,6 +48,8 @@ namespace Crazy_Checkers
             PositionArray = new Position[colSize, rowSize];
             // Populates each position with buttons
             CreateBtnGrid();
+            // Sets the first two and back two rows of the grid to belong to one player or another
+            SetupInitalPositions();
         }
 
         // Sets up the grid with the appropriate dimensions
@@ -76,7 +78,7 @@ namespace Crazy_Checkers
                 for (uint row = 0; row < RowCount; row++)
                 {
                     // Places button in array
-                    Position btn = PositionArray[col, row];
+                    ref Position btn = ref PositionArray[col, row];
                     // Creates button
                     btn = new Position(col, row, 2);
                     // Adds button to Main form
@@ -87,10 +89,29 @@ namespace Crazy_Checkers
             }
         }
 
+        // Sets the first two and back two rows of the grid to belong to one player or another 
+        public void SetupInitalPositions()
+        {
+            for (uint i = 0; i < 2; i++)
+            {
+                for (uint j = 0; j < ColumnCount; j++)
+                {
+                    SetPosition(i, j, 0, false);
+                }
+            }
+            for (uint i = Convert.ToUInt32(ColumnCount - 2); i < ColumnCount; i++)
+            {
+                for (uint j = 0; j < ColumnCount; j++)
+                {
+                    SetPosition(i, j, 1, false);
+                }
+            }
+        }
+
         // Returns a reference to a position
         public ref Position GetPosition(uint col, uint row)
         {
-            return ref PositionArray[col,row];
+            return ref PositionArray[col, row];
         }
 
         // Can be used to set all values of a position
@@ -108,7 +129,8 @@ namespace Crazy_Checkers
             }
             else
             {
-                PositionArray[col,row].Color = color;
+                PositionArray[col, row].Color = color;
+                PositionArray[col, row].isKing = isKing;
             }
         }
 
