@@ -142,6 +142,7 @@ namespace Crazy_Checkers
             this.ClientSize = new System.Drawing.Size(800, 526);
             this.Controls.Add(this.TopPanelTable);
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crazy Checkers";
             this.TopPanelTable.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
