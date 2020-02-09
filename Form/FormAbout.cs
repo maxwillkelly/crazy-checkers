@@ -101,5 +101,10 @@ namespace Crazy_Checkers
             }
         }
         #endregion
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }
