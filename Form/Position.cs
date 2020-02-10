@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -16,9 +16,10 @@ namespace Crazy_Checkers
 
         public uint Column { get; set; }
         public uint Row { get; set; }
-        public uint isKing { get; set; }
-        // 0 indicates back, 1 indicates red
-        public uint Color { get; set; }
+        public bool isKing { get; set; }
+        // 0 indicates black, 1 indicates red, 2 indicates blank
+        public uint Color { get { return _Color; } set { _Color = value; ColorChanged(); } }
+        private uint _Color;
 
         public Position(uint col, uint row, uint color)
         {
@@ -26,6 +27,7 @@ namespace Crazy_Checkers
             Row = row;
             MakeButton();
             Color = color;
+            isKing = false;
             // Names button based on location
             Name = "Btn_" + col + "_" + row;
         }
@@ -35,10 +37,32 @@ namespace Crazy_Checkers
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Dock = DockStyle.Fill;
+            //FlatStyle = FlatStyle.System;
+            Font = new Font(Font.FontFamily, 36);
             Margin = Padding.Empty;
             Padding = Padding.Empty;
             TabIndex = 0;
             //UseVisualStyleBackColor = true;
+        }
+
+        private void ColorChanged()
+        {
+            switch(Color)
+            {
+                case 0:
+                    Text = "⬤";
+                    ForeColor = System.Drawing.Color.Red;
+                    break;
+                case 1:
+                    Text = "⬤";
+                    ForeColor = System.Drawing.Color.Black;
+                    break;
+                case 2:
+                    Text = "";
+                    break;
+                default:
+                    throw new Exception("The color has attempted to be changed to an invalid value");
+            }
         }
 
         public override bool Equals(System.Object obj)
