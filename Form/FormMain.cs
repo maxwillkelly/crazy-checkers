@@ -15,7 +15,7 @@ namespace Crazy_Checkers
         Game game;
         FormAbout formAbout;
         FormSettings formSettings;
-
+        
         public FormMain()
         {
             InitializeComponent();
@@ -23,10 +23,6 @@ namespace Crazy_Checkers
             formAbout = new FormAbout();
             formSettings = new FormSettings();
             TopPanelTable.Controls.Add(game.MainGrid, 0, 1);
-        }
-
-        public void StartGame()
-        {
             game.Play();
         }
 
@@ -37,8 +33,9 @@ namespace Crazy_Checkers
 
         public void BtnSettings_Click(object sender, EventArgs e)
         {
-            formSettings.Show();
-            game.SetSettings(ref formSettings);
+            if (formSettings.ShowDialog() == DialogResult.OK) {
+                game.SetSettings(ref formSettings);
+            }
         }
     }
 }

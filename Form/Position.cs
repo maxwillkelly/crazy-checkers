@@ -52,7 +52,7 @@ namespace Crazy_Checkers
 
         private void ColorChanged()
         {
-            switch(_Color)
+            switch(Color)
             {
                 case 0:
                     Text = "⬤";
@@ -72,7 +72,7 @@ namespace Crazy_Checkers
 
         private void SquareColorChanged()
         {
-            switch(_SquareColor)
+            switch(SquareColor)
             {
                 case 0:
                     BackColor = System.Drawing.Color.White;
@@ -87,15 +87,41 @@ namespace Crazy_Checkers
 
         private void HighlightChanged()
         {
-            switch (_Highlight)
+            switch (Highlight)
             {
                 case true:
                     BackColor = System.Drawing.Color.Yellow;
                     break;
                 case false:
-                    BackColor = System.Drawing.Color.Yellow;
+                    // BackColor = System.Drawing.Color.Yellow;
                     break;
             }
+        }
+
+        public bool isBlack()
+        {
+            if (Color == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isRed()
+        {
+            if (Color == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool isBlank()
+        {
+            if (Color == 2)
+            {
+                return true;
+            }
+            return false;
         }
 
         public override bool Equals(System.Object obj)

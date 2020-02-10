@@ -49,8 +49,9 @@ namespace Crazy_Checkers
             PositionArray = new Position[colSize, rowSize];
             // Populates each position with buttons
             CreateBtnGrid();
-            // Sets the first two and back two rows of the grid to belong to one player or another
-            SquareColor();
+            // Sets each square on the Grid's background colour to match a checkers board
+            ResetSquareColor();
+            // Sets up pieces on each side of the Grid to belong to each player
             SetupInitalPositions();
         }
 
@@ -91,7 +92,7 @@ namespace Crazy_Checkers
             }
         }
 
-        // Sets the first two and back two rows of the grid to belong to one player or another 
+        // Sets up pieces on each side of the Grid to belong to each player 
         public void SetupInitalPositions()
         {
             for (uint i = 0; i < ColumnCount; i++)
@@ -103,10 +104,6 @@ namespace Crazy_Checkers
                         SetPosition(i, j, 0, false);
                     }
                 }
-            }
-
-            for (uint i = 0; i < ColumnCount; i++)
-            {
                 for (uint j = Convert.ToUInt32(RowCount - 3); j < RowCount; j++)
                 {
                     Position pos = GetPosition(i,j);
@@ -149,32 +146,8 @@ namespace Crazy_Checkers
             BtnEventHandler(sender, e);
         }
 
-        // private Square[,] square;
-
-        // public Grid()
-        // {
-        //     InitializeComponent();
-        //     int i, j;
-        //     this.square = new Square[8, 8];
-            
-        //     for (i = 0; i < 8; i++)
-        //     {
-        //         for (j = 0; j < 8; j++)
-        //         {
-        //             this.square[i, j] = new Square();
-        //             this.square[i, j].BackColor = System.Drawing.SystemColors.ActiveCaption; 
-        //             this.square[i, j].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle; 
-        //             this.square[i, j].Location = new System.Drawing.Point(57 + i * 40, 109 + j * 40); 
-        //             this.square[i, j].Name = "pictureBox1"; 
-        //             this.square[i, j].Size = new System.Drawing.Size(40, 40); 
-        //             this.square[i, j].TabIndex = 2; 
-        //             this.square[i, j].TabStop = false; 
-        //             this.Controls.Add(this.square[i, j]);
-        //         }
-        //     }
-        // }
-
-        private void SquareColor() {
+        // Sets each square on the Grid's background colour to match a checkers board
+        public void ResetSquareColor() {
 
             for (uint i = 1; i < ColumnCount; i+=2)
             {
