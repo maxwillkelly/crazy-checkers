@@ -55,7 +55,7 @@ namespace Crazy_Checkers
             this.TopPanelTable.RowCount = 2;
             this.TopPanelTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.TopPanelTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TopPanelTable.Size = new System.Drawing.Size(800, 526);
+            this.TopPanelTable.Size = new System.Drawing.Size(782, 832);
             this.TopPanelTable.TabIndex = 2;
             // 
             // topPanel
@@ -70,7 +70,7 @@ namespace Crazy_Checkers
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(800, 50);
+            this.topPanel.Size = new System.Drawing.Size(782, 50);
             this.topPanel.TabIndex = 2;
             // 
             // ImageRed32
@@ -139,10 +139,9 @@ namespace Crazy_Checkers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 526);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(782, 832);
             this.Controls.Add(this.TopPanelTable);
-            this.MaximumSize = new System.Drawing.Size(818, 573);
-            this.MinimumSize = new System.Drawing.Size(818, 573);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crazy Checkers";

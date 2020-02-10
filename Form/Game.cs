@@ -79,7 +79,8 @@ namespace Crazy_Checkers
 
             // Add to this method to specify what happens when a button is clicked
 
-            // Max: I'm gonna work on method to set up an inital grid for the start of a game
+            // Max: I'm gonna work on method to set up and opening grid
+            // Ramsay: Are you aware of how I can check the Button's/Position's "settings"? I'm not sure what "sender" refers to
         }
 
         public void SetSettings(ref FormSettings formSettings)

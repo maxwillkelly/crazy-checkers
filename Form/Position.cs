@@ -37,6 +37,8 @@ namespace Crazy_Checkers
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Dock = DockStyle.Fill;
+            //FlatStyle = FlatStyle.System;
+            Font = new Font(Font.FontFamily, 36);
             Margin = Padding.Empty;
             Padding = Padding.Empty;
             TabIndex = 0;
@@ -53,7 +55,7 @@ namespace Crazy_Checkers
                     break;
                 case 1:
                     Text = "⬤";
-                    ForeColor = System.Drawing.Color.White;
+                    ForeColor = System.Drawing.Color.Black;
                     break;
                 case 2:
                     Text = "";
