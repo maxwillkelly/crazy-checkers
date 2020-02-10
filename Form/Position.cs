@@ -20,6 +20,10 @@ namespace Crazy_Checkers
         // 0 indicates black, 1 indicates red, 2 indicates blank
         public uint Color { get { return _Color; } set { _Color = value; ColorChanged(); } }
         private uint _Color;
+        public uint SquareColor { get { return _SquareColor; } set { _SquareColor = value; SquareColorChanged(); } }
+        private uint _SquareColor;
+        public bool Highlight { get { return _Highlight; } set { _Highlight = value; HighlightChanged(); } }
+        private bool _Highlight;
 
         public Position(uint col, uint row, uint color)
         {
@@ -36,6 +40,7 @@ namespace Crazy_Checkers
         {
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            BackColor = System.Drawing.Color.White;
             Dock = DockStyle.Fill;
             //FlatStyle = FlatStyle.System;
             Font = new Font(Font.FontFamily, 36);
@@ -47,7 +52,7 @@ namespace Crazy_Checkers
 
         private void ColorChanged()
         {
-            switch(Color)
+            switch(_Color)
             {
                 case 0:
                     Text = "⬤";
@@ -62,6 +67,34 @@ namespace Crazy_Checkers
                     break;
                 default:
                     throw new Exception("The color has attempted to be changed to an invalid value");
+            }
+        }
+
+        private void SquareColorChanged()
+        {
+            switch(_SquareColor)
+            {
+                case 0:
+                    BackColor = System.Drawing.Color.White;
+                    break;
+                case 1:
+                    BackColor = System.Drawing.Color.Gray;
+                    break;
+                default:
+                    throw new Exception("The color has attempted to be changed to an invalid value");
+            }
+        }
+
+        private void HighlightChanged()
+        {
+            switch (_Highlight)
+            {
+                case true:
+                    BackColor = System.Drawing.Color.Yellow;
+                    break;
+                case false:
+                    BackColor = System.Drawing.Color.Yellow;
+                    break;
             }
         }
 
