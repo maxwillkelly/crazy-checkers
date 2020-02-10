@@ -48,7 +48,7 @@ namespace Crazy_Checkers
         {
             // Sets new values
             ruleSet = ruleSetComboBox.SelectedIndex;
-            gridSize = Convert.ToInt32(gridSizeLabel.Text);
+            gridSize = Convert.ToInt32(gridSizeUnitsLabel.Text);
             sound = soundCheckBox.Checked;
             Hide();
         }

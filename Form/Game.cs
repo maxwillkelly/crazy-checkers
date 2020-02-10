@@ -13,7 +13,8 @@ namespace Crazy_Checkers
         // validate winning move
         // 
         private int playersTurn = 0;
-        private bool gameOver = false;
+        private bool GameOver = false;
+        private int opposition = 1;
 
         // Grid Dimensions
         private uint colSize = 8;
@@ -30,21 +31,24 @@ namespace Crazy_Checkers
         private int gridSize;
         private bool sound;
 
+        // Constructor
         public Game()
         {
+            // Creates the main grid to store each position
             MainGrid = new Grid(colSize, rowSize);
-            MainGrid.BtnEventHandler += processBtn;
+            // Adds an event handler which runs each time a position is clicked
+            MainGrid.BtnEventHandler += ProcessBtn;
+            // Creates two players
             players = new Player[2];
             for (int i = 0; i < players.Length; i++)
             {
                 players[i] = new Player(colSize, rowSize);
-                Console.WriteLine("Player " + (i + 1) + ": " + players[i].Score);
             }
         }
 
         public void Play()
         {
-            if (!gameOver)
+            if (!GameOver)
             {
                 // check if gameOver
                 // do this, by checking all valid moves and/or player is out of positions
@@ -56,12 +60,20 @@ namespace Crazy_Checkers
         }
 
         // Runs when a position is clicked in the grid
-        public void processBtn(object sender, EventArgs e)
+        public void ProcessBtn(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            string[] btnString = button.Name.Split('_');
-            uint col = Convert.ToUInt32(btnString[1]);
-            uint row = Convert.ToUInt32(btnString[2]);
+            Position position = (Position) sender;
+            string[] posString = position.Name.Split('_');
+            uint col = Convert.ToUInt32(posString[1]);
+            uint row = Convert.ToUInt32(posString[2]);
+
+            if (playersTurn == 0) {
+                opposition = 1;
+            } else {
+                opposition = 0;
+            }
+
+            
 
             // all valid moves will be highlighted around position
 
@@ -70,6 +82,17 @@ namespace Crazy_Checkers
             // validate if any of [x-1, y-1], [x+1, y-1], [x+1, y+1], [x-1, y+1] are opposite of playersTurn
             // if so, add these to an array and check if there is a Position with Color = 2 (blank), if so, this move is valid and 
             // can be highlighted
+            Console.WriteLine(position.Row + " " + position.Column);
+
+            // Console.WriteLine(MainGrid.GetPosition(position.Column - 1, position.Row + 1));
+
+            Position chosen = MainGrid.GetPosition(position.Column, position.Row);
+
+            for (int i = -1; i <= 1; i+=2) {
+                if (MainGrid.GetPosition(Convert.ToUInt32(position.Column + i), Convert.ToUInt32(position.Row - 1)).Color == opposition) {
+                    Console.WriteLine("There is an opponent diagonal of chosen position ");
+                }
+            }
 
             // this requires:
             // 	- being able to retrieve button color
@@ -81,6 +104,7 @@ namespace Crazy_Checkers
 
             // Max: I'm gonna work on method to set up and opening grid
             // Ramsay: Are you aware of how I can check the Button's/Position's "settings"? I'm not sure what "sender" refers to
+            position.Color = 1;
         }
 
         public void SetSettings(ref FormSettings formSettings)

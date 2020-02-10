@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,15 +16,15 @@ namespace Crazy_Checkers
         // Stores each position so they can be accessed
         private Position[,] PositionArray;
 
-        /* COMMENTS AREA
-        We need to:
-            - set up a way to get the state of a piece selected
-            - set up a way to set the state of a piece
+        // /* COMMENTS AREA
+        // We need to:
+        //     - set up a way to get the state of a piece selected
+        //     - set up a way to set the state of a piece
 
-        We have done:
-            -     
+        // We have done:
+        //     -     
         
-        */
+        // */
 
         public Grid(uint colSize, uint rowSize)
         {
@@ -49,6 +50,7 @@ namespace Crazy_Checkers
             // Populates each position with buttons
             CreateBtnGrid();
             // Sets the first two and back two rows of the grid to belong to one player or another
+            SquareColor();
             SetupInitalPositions();
         }
 
@@ -92,18 +94,25 @@ namespace Crazy_Checkers
         // Sets the first two and back two rows of the grid to belong to one player or another 
         public void SetupInitalPositions()
         {
-            for (uint i = 0; i < 2; i++)
+            for (uint i = 0; i < ColumnCount; i++)
             {
-                for (uint j = 0; j < ColumnCount; j++)
+                for (uint j = 0; j < 3; j++)
                 {
-                    SetPosition(i, j, 0, false);
+                    Position pos = GetPosition(i,j);
+                    if (pos.SquareColor == 1) {
+                        SetPosition(i, j, 0, false);
+                    }
                 }
             }
-            for (uint i = Convert.ToUInt32(ColumnCount - 2); i < ColumnCount; i++)
+
+            for (uint i = 0; i < ColumnCount; i++)
             {
-                for (uint j = 0; j < ColumnCount; j++)
+                for (uint j = Convert.ToUInt32(RowCount - 3); j < RowCount; j++)
                 {
-                    SetPosition(i, j, 1, false);
+                    Position pos = GetPosition(i,j);
+                    if (pos.SquareColor == 1) {
+                        SetPosition(i, j, 1, false);
+                    }
                 }
             }
         }
@@ -138,6 +147,50 @@ namespace Crazy_Checkers
         public void BtnClick(object sender, EventArgs e)
         {
             BtnEventHandler(sender, e);
+        }
+
+        // private Square[,] square;
+
+        // public Grid()
+        // {
+        //     InitializeComponent();
+        //     int i, j;
+        //     this.square = new Square[8, 8];
+            
+        //     for (i = 0; i < 8; i++)
+        //     {
+        //         for (j = 0; j < 8; j++)
+        //         {
+        //             this.square[i, j] = new Square();
+        //             this.square[i, j].BackColor = System.Drawing.SystemColors.ActiveCaption; 
+        //             this.square[i, j].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle; 
+        //             this.square[i, j].Location = new System.Drawing.Point(57 + i * 40, 109 + j * 40); 
+        //             this.square[i, j].Name = "pictureBox1"; 
+        //             this.square[i, j].Size = new System.Drawing.Size(40, 40); 
+        //             this.square[i, j].TabIndex = 2; 
+        //             this.square[i, j].TabStop = false; 
+        //             this.Controls.Add(this.square[i, j]);
+        //         }
+        //     }
+        // }
+
+        private void SquareColor() {
+
+            for (uint i = 1; i < ColumnCount; i+=2)
+            {
+                for (uint j = 0; j < RowCount; j+=2)
+                {
+                    PositionArray[i,j].SquareColor = 1;
+                }
+            }
+
+            for (uint i = 0; i < ColumnCount; i+=2)
+            {
+                for (uint j = 1; j < RowCount; j+=2)
+                {
+                    PositionArray[i,j].SquareColor = 1;
+                }
+            }
         }
     }
 }
