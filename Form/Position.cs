@@ -22,8 +22,6 @@ namespace Crazy_Checkers
         private uint _Color;
         public uint SquareColor { get { return _SquareColor; } set { _SquareColor = value; SquareColorChanged(); } }
         private uint _SquareColor;
-        public bool Highlight { get { return _Highlight; } set { _Highlight = value; HighlightChanged(); } }
-        private bool _Highlight;
 
         public Position(uint col, uint row, uint color)
         {
@@ -80,21 +78,14 @@ namespace Crazy_Checkers
                 case 1:
                     BackColor = System.Drawing.Color.Gray;
                     break;
-                default:
-                    throw new Exception("The color has attempted to be changed to an invalid value");
-            }
-        }
-
-        private void HighlightChanged()
-        {
-            switch (Highlight)
-            {
-                case true:
+                case 2:
+                    BackColor = System.Drawing.Color.Blue;
+                    break;
+                case 3:
                     BackColor = System.Drawing.Color.Yellow;
                     break;
-                case false:
-                    // BackColor = System.Drawing.Color.Yellow;
-                    break;
+                default:
+                    throw new Exception("The color has attempted to be changed to an invalid value");
             }
         }
 

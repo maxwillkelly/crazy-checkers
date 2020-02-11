@@ -42,6 +42,15 @@ namespace Crazy_Checkers
             return false;
         }
 
+        public bool isBlank()
+        {
+            if (Current[3] == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void printMove()
         {
             Console.WriteLine("Current: Col: " + Current[0]);

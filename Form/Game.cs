@@ -22,13 +22,17 @@ namespace Crazy_Checkers
 
         // Players
         private Player[] players;
+
         // Settings
         private int ruleSet;
-        private int gridSize;
         private bool sound;
 
         // Storage
         private Move trailMove;
+
+        // Event Handlers
+        public event EventHandler ScoreEventHandler;
+        public event EventHandler TurnChangeEventHandler;
 
         // Constructor
         public Game()
@@ -49,6 +53,7 @@ namespace Crazy_Checkers
             {
                 players[i] = new Player(colSize, rowSize, i);
             }
+            // Sets the current player to 0
             CurrentPlayer = players[0];
             trailMove = new Move();
         }
@@ -77,45 +82,52 @@ namespace Crazy_Checkers
 
             Position chosen = MainGrid.GetPosition(position.Column, position.Row);
 
-            /*for (int i = -1; i <= 1; i += 2)
+                // this requires:
+                // 	- being able to check 4 diagonal spots around button
+                // 	- being able to check spots after opposition buttons 
+
+                // if opposition = 0 and CurrentPlayer = 1 (op: black, cur: red)
+                //      we check row - 1  (column += 1 and column += -1)
+                //  else 
+                //      we check row + 1 (column += 1 and column += -1)
+                // as the direction "forward" flips each turn
+
+
+            // Checks if we haven't added a current
+            if (chosen.Color == CurrentPlayer.playerNum && trailMove.isBlank())
             {
-                if (MainGrid.GetPosition(Convert.ToUInt32(position.Column + i), Convert.ToUInt32(position.Row - 1)).Color == CurrentPlayer.opposition)
-                {
-                    Console.WriteLine("There is an opponent diagonal of chosen position ");
-                }
-            }*/
-
-
-            // this requires:
-            // 	- being able to check 4 diagonal spots around button
-            // 	- being able to check spots after opposition buttons 
-
-            // if opposition = 0 and CurrentPlayer = 1 (op: black, cur: red)
-            //      we check row - 1  (column += 1 and column += -1)
-            //  else 
-            //      we check row + 1 (column += 1 and column += -1)
-            // as the direction "forward" flips each turn
-
-            if (!trailMove.AddUnit(col, row, chosen.Color))
+                // Adds the positon we have selected to the trialGrid
+                trailMove.AddUnit(col, row, chosen.Color);
+                // Determines which moves the player can play with the current piece selected
+                CurrentPlayer.GenerateTactGrid(ref MainGrid, ref trailMove);
+                // Sets the square colour of the piece we have clicked on to indicate it has been selected
+                MainGrid.SetSquareColor(col, row, 2);
+            }
+            // Checks if the position we have clicked on is a valid move
+            else if (CurrentPlayer.GetValidMove(col, row))
+            {
+                // Removes the counter from its previous position
+                MainGrid.SetPosition(trailMove.Current[0], trailMove.Current[1], 2, false);
+                // Adds the counter in its new position
+                MainGrid.SetPosition(col, row, CurrentPlayer.playerNum, false);
+                trailMove.ResetUnit();
+                MainGrid.ResetSquareColor();
+                Play();
+            }
+            else
             {
                 trailMove.ResetUnit();
                 MainGrid.ResetSquareColor();
-            }
-            // Checks if we haven't added a target
-            else if (!trailMove.isFull())
-            {
-                // Determines which moves the player can play with the current piece selected
-                CurrentPlayer.GenerateTactGrid(ref MainGrid, ref trailMove);
             }
 
             // validation to do:
             // - Three categories of validation (Standard forward, standard take, king)
             // - Standard forward:
-            // - Check its only 1 position : Target[1] - Current[1] == 1
-            // - Check the piece is blank : Target.Color
+            // - Check its only 1 position : Target[1] - Current[1] == 1 ✅
+            // - Check the piece is blank : Target.Color ✅
             // - Check the piece is moving towards the opponent ✅
             // - Standard take:
-            // - Check its diagonal
+            // - Check its diagonal ✅
             // - Check the target is two pieces away
             // - Check an opponent player is between current and taken ✅
             // - King:
