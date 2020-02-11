@@ -22,13 +22,17 @@ namespace Crazy_Checkers
 
         // Players
         private Player[] players;
+
         // Settings
         private int ruleSet;
-        private int gridSize;
         private bool sound;
 
         // Storage
         private Move trailMove;
+
+        // Event Handlers
+        public event EventHandler ScoreEventHandler;
+        public event EventHandler TurnChangeEventHandler;
 
         // Constructor
         public Game()
@@ -49,6 +53,7 @@ namespace Crazy_Checkers
             {
                 players[i] = new Player(colSize, rowSize, i);
             }
+            // Sets the current player to 0
             CurrentPlayer = players[0];
             trailMove = new Move();
         }
