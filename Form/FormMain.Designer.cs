@@ -1,4 +1,4 @@
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Crazy_Checkers
 {
@@ -30,19 +30,16 @@ namespace Crazy_Checkers
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.TopPanelTable = new System.Windows.Forms.TableLayoutPanel();
             this.topPanel = new System.Windows.Forms.Panel();
-            this.ImageRed32 = new System.Windows.Forms.PictureBox();
-            this.ImageBlack32 = new System.Windows.Forms.PictureBox();
             this.BtnSettings = new System.Windows.Forms.Button();
             this.BtnAbout = new System.Windows.Forms.Button();
             this.ScoreRed = new System.Windows.Forms.Label();
             this.ScoreBlack = new System.Windows.Forms.Label();
+            this.redTurnIndicator = new System.Windows.Forms.Label();
+            this.blackTurnIndicator = new System.Windows.Forms.Label();
             this.TopPanelTable.SuspendLayout();
             this.topPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageRed32)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageBlack32)).BeginInit();
             this.SuspendLayout();
             // 
             // TopPanelTable
@@ -63,8 +60,8 @@ namespace Crazy_Checkers
             // topPanel
             // 
             this.topPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.topPanel.Controls.Add(this.ImageRed32);
-            this.topPanel.Controls.Add(this.ImageBlack32);
+            this.topPanel.Controls.Add(this.blackTurnIndicator);
+            this.topPanel.Controls.Add(this.redTurnIndicator);
             this.topPanel.Controls.Add(this.BtnSettings);
             this.topPanel.Controls.Add(this.BtnAbout);
             this.topPanel.Controls.Add(this.ScoreRed);
@@ -74,28 +71,6 @@ namespace Crazy_Checkers
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(782, 50);
             this.topPanel.TabIndex = 2;
-            // 
-            // ImageRed32
-            // 
-            this.ImageRed32.Image = ((System.Drawing.Image)(resources.GetObject("ImageRed32.Image")));
-            this.ImageRed32.Location = new System.Drawing.Point(452, 10);
-            this.ImageRed32.Margin = new System.Windows.Forms.Padding(0);
-            this.ImageRed32.Name = "ImageRed32";
-            this.ImageRed32.Size = new System.Drawing.Size(28, 26);
-            this.ImageRed32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ImageRed32.TabIndex = 5;
-            this.ImageRed32.TabStop = false;
-            // 
-            // ImageBlack32
-            // 
-            this.ImageBlack32.Image = ((System.Drawing.Image)(resources.GetObject("ImageBlack32.Image")));
-            this.ImageBlack32.Location = new System.Drawing.Point(326, 11);
-            this.ImageBlack32.Margin = new System.Windows.Forms.Padding(0);
-            this.ImageBlack32.Name = "ImageBlack32";
-            this.ImageBlack32.Size = new System.Drawing.Size(28, 26);
-            this.ImageBlack32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ImageBlack32.TabIndex = 4;
-            this.ImageBlack32.TabStop = false;
             // 
             // BtnSettings
             // 
@@ -121,9 +96,11 @@ namespace Crazy_Checkers
             // 
             this.ScoreRed.AutoSize = true;
             this.ScoreRed.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScoreRed.Location = new System.Drawing.Point(405, 11);
+            this.ScoreRed.Location = new System.Drawing.Point(405, 8);
+            this.ScoreRed.Margin = new System.Windows.Forms.Padding(3);
             this.ScoreRed.Name = "ScoreRed";
-            this.ScoreRed.Size = new System.Drawing.Size(39, 29);
+            this.ScoreRed.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.ScoreRed.Size = new System.Drawing.Size(39, 33);
             this.ScoreRed.TabIndex = 1;
             this.ScoreRed.Text = "00";
             // 
@@ -131,11 +108,37 @@ namespace Crazy_Checkers
             // 
             this.ScoreBlack.AutoSize = true;
             this.ScoreBlack.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScoreBlack.Location = new System.Drawing.Point(360, 11);
+            this.ScoreBlack.Location = new System.Drawing.Point(360, 8);
+            this.ScoreBlack.Margin = new System.Windows.Forms.Padding(3);
             this.ScoreBlack.Name = "ScoreBlack";
-            this.ScoreBlack.Size = new System.Drawing.Size(39, 29);
+            this.ScoreBlack.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.ScoreBlack.Size = new System.Drawing.Size(39, 33);
             this.ScoreBlack.TabIndex = 0;
             this.ScoreBlack.Text = "00";
+            // 
+            // redTurnIndicator
+            // 
+            this.redTurnIndicator.AutoSize = true;
+            this.redTurnIndicator.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.redTurnIndicator.ForeColor = System.Drawing.Color.Red;
+            this.redTurnIndicator.Location = new System.Drawing.Point(316, 5);
+            this.redTurnIndicator.Margin = new System.Windows.Forms.Padding(0);
+            this.redTurnIndicator.Name = "redTurnIndicator";
+            this.redTurnIndicator.Size = new System.Drawing.Size(41, 39);
+            this.redTurnIndicator.TabIndex = 4;
+            this.redTurnIndicator.Text = "⬤";
+            // 
+            // blackTurnIndicator
+            // 
+            this.blackTurnIndicator.AutoSize = true;
+            this.blackTurnIndicator.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.blackTurnIndicator.ForeColor = System.Drawing.Color.Black;
+            this.blackTurnIndicator.Location = new System.Drawing.Point(447, 5);
+            this.blackTurnIndicator.Margin = new System.Windows.Forms.Padding(0);
+            this.blackTurnIndicator.Name = "blackTurnIndicator";
+            this.blackTurnIndicator.Size = new System.Drawing.Size(41, 39);
+            this.blackTurnIndicator.TabIndex = 5;
+            this.blackTurnIndicator.Text = "⬤";
             // 
             // FormMain
             // 
@@ -150,8 +153,6 @@ namespace Crazy_Checkers
             this.TopPanelTable.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
             this.topPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageRed32)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageBlack32)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -163,8 +164,8 @@ namespace Crazy_Checkers
         private System.Windows.Forms.Button BtnAbout;
         private System.Windows.Forms.Label ScoreRed;
         private System.Windows.Forms.Label ScoreBlack;
-        private System.Windows.Forms.PictureBox ImageRed32;
-        private System.Windows.Forms.PictureBox ImageBlack32;
+        private Label redTurnIndicator;
+        private Label blackTurnIndicator;
     }
 }
 

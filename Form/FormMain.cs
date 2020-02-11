@@ -20,6 +20,8 @@ namespace Crazy_Checkers
         {
             InitializeComponent();
             game = new Game();
+            //game.ScoreEventHandler += (sender, e) => SetScore(sender, e, players);
+            game.TurnChangeEventHandler += SetTurn;
             formAbout = new FormAbout();
             formSettings = new FormSettings();
             TopPanelTable.Controls.Add(game.MainGrid, 0, 1);
@@ -36,6 +38,29 @@ namespace Crazy_Checkers
             if (formSettings.ShowDialog() == DialogResult.OK)
             {
                 game.SetSettings(ref formSettings);
+            }
+        }
+
+        public void SetScore(object sender, EventArgs e, Player[,] players)
+        {
+
+        }
+
+        public void SetTurn(object sender, EventArgs e)
+        {
+            uint playerNum = (uint)sender;
+            switch (playerNum)
+            {
+                case 0:
+                    blackTurnIndicator.Visible = false;
+                    redTurnIndicator.Visible = true;
+                    break;
+                case 1:
+                    blackTurnIndicator.Visible = true;
+                    redTurnIndicator.Visible = false;
+                    break;
+                default:
+                    break;
             }
         }
 
