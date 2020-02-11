@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace Crazy_Checkers
 {
     partial class FormMain

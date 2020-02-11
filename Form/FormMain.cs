@@ -15,7 +15,7 @@ namespace Crazy_Checkers
         Game game;
         FormAbout formAbout;
         FormSettings formSettings;
-        
+
         public FormMain()
         {
             InitializeComponent();
@@ -33,8 +33,26 @@ namespace Crazy_Checkers
 
         public void BtnSettings_Click(object sender, EventArgs e)
         {
-            if (formSettings.ShowDialog() == DialogResult.OK) {
+            if (formSettings.ShowDialog() == DialogResult.OK)
+            {
                 game.SetSettings(ref formSettings);
+            }
+        }
+
+        // Based on a method from Stackoverflow user Chap
+        // https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            // Prevents the game from preventing a Windows Shutdown
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            switch (MessageBox.Show(this, "Are you sure you want to close the game, your progress will be lost?", "Closing", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.No:
+                    e.Cancel = true;
+                    break;
+                default:
+                    break;
             }
         }
     }
