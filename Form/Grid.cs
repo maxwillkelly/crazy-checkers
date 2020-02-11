@@ -146,9 +146,23 @@ namespace Crazy_Checkers
             BtnEventHandler(sender, e);
         }
 
+        public void SetSquareColor(uint col, uint row, uint color)
+        {
+            PositionArray[col, row].SquareColor = color;
+        }
+
         // Sets each square on the Grid's background colour to match a checkers board
         public void ResetSquareColor() {
+            // Resets Grid's Square Color to white
+            for(uint i = 0; i < ColumnCount; i++)
+            {
+                for (uint j = 0; j < RowCount; j++)
+                {
+                    PositionArray[i, j].SquareColor = 0;
+                }
+            }
 
+            // Sets individual pieces to gray
             for (uint i = 1; i < ColumnCount; i+=2)
             {
                 for (uint j = 0; j < RowCount; j+=2)
