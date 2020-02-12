@@ -70,7 +70,7 @@ namespace Crazy_Checkers
                 CurrentPlayer = players[0];
             }
             EventArgs e = new EventArgs();
-            //ScoreEventHandler(players, e);
+            ScoreEventHandler(players, e);
             TurnChangeEventHandler(CurrentPlayer.playerNum, e);
         }
 
@@ -79,9 +79,9 @@ namespace Crazy_Checkers
         {
             // 
             Position position = (Position)sender;
-            string[] posString = position.Name.Split('_');
-            uint col = Convert.ToUInt32(posString[1]);
-            uint row = Convert.ToUInt32(posString[2]);
+            uint col = position.Column;
+            uint row = position.Row;
+            bool king = position.isKing;
 
             Position chosen = MainGrid.GetPosition(position.Column, position.Row);
 
@@ -109,10 +109,18 @@ namespace Crazy_Checkers
             // Checks if the position we have clicked on is a valid move
             else if (CurrentPlayer.GetValidMove(col, row))
             {
+                Counter taken = CurrentPlayer.GetTaken(trailMove.Current.Col, trailMove.Current.Row);
+                // Checks if a piece is needs to be taken
+                if (taken.Used)
+                {
+                    // Takes an opponent's piece
+                    MainGrid.SetPosition(taken.Col, taken.Row, 2, taken.King);
+                    CurrentPlayer.Score++;
+                }
                 // Removes the counter from its previous position
-                MainGrid.SetPosition(trailMove.Current[0], trailMove.Current[1], 2, false);
+                MainGrid.SetPosition(trailMove.Current.Col, trailMove.Current.Row, 2, trailMove.Taken.King);
                 // Adds the counter in its new position
-                MainGrid.SetPosition(col, row, CurrentPlayer.playerNum, false);
+                MainGrid.SetPosition(col, row, CurrentPlayer.playerNum, trailMove.Current.King);
                 trailMove.ResetUnit();
                 MainGrid.ResetSquareColor();
                 Play();
@@ -144,20 +152,28 @@ namespace Crazy_Checkers
             // 3. taking a piece - CheckPieceTaken() in TactGrid
         }
 
-
-        public void SetSettings(ref FormSettings formSettings)
+        public bool AI()
         {
+            bool playable = false;
+            for (uint i = 0; i < colSize; i++)
+            {
+                for (uint j = 0; j < rowSize; j++)
+                {
+                    if (MainGrid.GetPosition(i, j).Color == CurrentPlayer.playerNum)
+                    {
+
+                    }
+                }
+            }
+            return playable;
+        }
+
+        public void SetSettings(ref FormSettings formSettings) {
             ruleSet = formSettings.ruleSet;
             colSize = Convert.ToUInt32(Math.Sqrt(formSettings.gridSize));
             rowSize = colSize;
             sound = formSettings.sound;
             ResetGame();
-        }
-
-        private void Finish()
-        {
-            MessageBox.Show("You have finished the game");
-            throw new NotImplementedException();
         }
     }
 }

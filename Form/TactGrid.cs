@@ -10,18 +10,15 @@ namespace Crazy_Checkers
     {
         private uint Columns = 8;
         private uint Rows = 8;
-        private bool[,] validMove;
-
-        public TactGrid()
-        {
-            validMove = new bool[Columns, Rows];
-        }
+        private bool[,] ValidMove;
+        private Counter[,] Taken;
 
         public TactGrid(uint Columns, uint Rows)
         {
             this.Columns = Columns;
             this.Rows = Rows;
-            validMove = new bool[Columns, Rows];
+            ValidMove = new bool[Columns, Rows];
+            Taken = new Counter[Columns, Rows];
         }
 
         // Returns true if the player can move
@@ -32,12 +29,12 @@ namespace Crazy_Checkers
             {
                 for (uint j = 0; j < Rows; j++)
                 {
-                    validMove[i, j] = false;
-
+                    ValidMove[i, j] = false;
+                    Taken[i, j] = new Counter();
                     if (GenValidMove(ref grid, ref move, i, j, playerNum, opposition))
                     {
                         playable = true;
-                        validMove[i, j] = true;
+                        ValidMove[i, j] = true;
                     }
                 }
             }
@@ -50,9 +47,12 @@ namespace Crazy_Checkers
             bool blank = grid.GetPosition(col, row).isBlank();
             bool forward = CheckForward(ref grid, ref move, col, row, playerNum, opposition);
             double piecesAway = CheckPiecesAway(ref move, col, row);
-            bool pieceTaken = CheckPieceTaken(ref grid, ref move, opposition, piecesAway);
-            // standard
-            if (blank && (forward && (piecesAway == Math.Sqrt(2)) || pieceTaken))
+            bool pieceTaken = CheckPieceTaken(ref grid, ref move, opposition);
+            bool standard = blank && forward && piecesAway == Math.Sqrt(2);
+            bool taken = piecesAway == Math.Sqrt(8) && pieceTaken && blank && forward;
+            bool king = grid.GetPosition(col, row).isKing;
+            // standard and taken
+            if (standard || taken)
             {
                 grid.SetSquareColor(col, row, 3);
                 return true;
@@ -62,29 +62,52 @@ namespace Crazy_Checkers
 
         private double CheckPiecesAway(ref Move move, uint col, uint row)
         {
-            int xDist = Convert.ToInt32(move.Current[0]) - Convert.ToInt32(col);
-            int yDist = Convert.ToInt32(move.Current[1]) - Convert.ToInt32(row);
+            int xDist = Convert.ToInt32(move.Current.Col) - Convert.ToInt32(col);
+            int yDist = Convert.ToInt32(move.Current.Row) - Convert.ToInt32(row);
             double squaredDist = Math.Pow(xDist, 2) + Math.Pow(yDist, 2);
             return Math.Sqrt(squaredDist);
         }
 
         // Checks if a piece is being taken from another player
-        private bool CheckPieceTaken(ref Grid grid, ref Move move, uint opposition, double piecesAway)
+        private bool CheckPieceTaken(ref Grid grid, ref Move move, uint opposition)
         {
-            double xDist = (Convert.ToInt32(move.Current[0]) - Convert.ToInt32(move.Target[0]));
-            double yDist = (Convert.ToInt32(move.Current[1]) - Convert.ToInt32(move.Target[1]));
-            Console.WriteLine(xDist + " : " + yDist);
-            if (piecesAway == 2 && xDist == 2.0 && yDist == 2.0)
-            {
-                uint x = Convert.ToUInt32(Math.Abs(xDist));
-                uint y = Convert.ToUInt32(Math.Abs(yDist));
-                // Math.abs(current[0] - target[0])
-                // math.abs(current[1] - target[1])
+            // check that counter between move.Current move.Target is .Color == opposition
+            uint averageRow = (move.Current.Row + move.Target.Row) / 2;
+            uint averageCol = (move.Current.Col + move.Target.Col) / 2;
+            //return grid.GetPosition(averageCol, averageRow);
 
-                if (grid.GetPosition(x, y).Color == opposition)
+            int betweenRow, betweenCol;
+            int moveCol = Convert.ToInt32(move.Current.Col);
+            int moveRow = Convert.ToInt32(move.Current.Row);
+
+            for (int i = -1; i < 1; i += 2)
+            {
+                for (int j = -1; j < 1; j += 2)
                 {
-                    // grid.SetPosition(x, y, 2, false);
-                    return true;
+                    betweenCol = moveCol + i;
+                    betweenRow = moveRow + j;
+
+                    // Checks the position we're looking up is correct
+                    if (betweenCol >= 0 && betweenRow >= 0 && betweenCol < Columns && betweenRow < Rows) {
+                        // Checks piece to be taken is owned by the opposition
+                        if (grid.GetPosition(Convert.ToUInt32(betweenCol), Convert.ToUInt32(betweenRow)).Color == opposition) {
+                            Taken[move.Current.Col, move.Current.Row] = new Counter(Convert.ToUInt32(betweenCol), Convert.ToUInt32(betweenRow), opposition);
+                            return true;
+                        }
+                    }
+                    
+                    // if (betweenCol >= 0 && betweenRow >= 0 && betweenCol < Columns && betweenRow < Rows)
+                    // {
+                    //     if (moveCol == (moveCol + (i / 2)) && moveRow == moveRow + (j / 2)) 
+                    //     {
+                    //         if (grid.GetPosition(Convert.ToUInt32(betweenCol), Convert.ToUInt32(betweenRow)).Color == opposition)
+                    //         {
+                    //             Taken[move.Current.Col, move.Current.Row] = new Counter(Convert.ToUInt32(betweenCol), Convert.ToUInt32(betweenRow), opposition);
+                    //             Console.WriteLine("[" + betweenCol + "," + betweenRow + "] : " + grid.GetPosition(Convert.ToUInt32(betweenCol), Convert.ToUInt32(betweenRow)).Color);
+                    //             return true;
+                    //         }
+                    //     }
+                    //}
                 }
             }
             return false;
@@ -92,18 +115,16 @@ namespace Crazy_Checkers
 
         private bool CheckForward(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition)
         {
-            // Column, Row, Color, Used
-
             if (playerNum == 0)
             {
-                if (move.Current[1] < row)
+                if (move.Current.Row < row)
                 {
                     return true;
                 }
-            } 
+            }
             else if (playerNum == 1)
             {
-                if (move.Current[1] > row)
+                if (move.Current.Row > row)
                 {
                     return true;
                 }
@@ -113,12 +134,17 @@ namespace Crazy_Checkers
 
         public bool GetSquare(uint col, uint row)
         {
-            return validMove[col, row];
+            return ValidMove[col, row];
         }
 
         public void SetSquare(uint col, uint row, bool valid)
         {
-            validMove[col, row] = valid;
+            ValidMove[col, row] = valid;
+        }
+
+        public Counter GetTaken(uint col, uint row)
+        {
+            return Taken[col, row];
         }
     }
 }

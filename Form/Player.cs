@@ -12,7 +12,7 @@ namespace Crazy_Checkers {
 		public Player(uint cols, uint rows, uint playerNum)
 		{
 			tactGrid = new TactGrid(cols, rows);
-			Score = 10;
+			Score = 0;
 			this.playerNum = playerNum;
 			if (playerNum == 0)
 			{
@@ -32,6 +32,11 @@ namespace Crazy_Checkers {
 		public bool GetValidMove(uint col, uint row)
 		{
 			return tactGrid.GetSquare(col, row);
+		}
+
+		public Counter GetTaken(uint col, uint row)
+		{
+			return tactGrid.GetTaken(col, row);
 		}
 	}
 }
