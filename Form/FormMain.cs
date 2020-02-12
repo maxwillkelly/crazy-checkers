@@ -44,11 +44,11 @@ namespace Crazy_Checkers
             var players = sender as IEnumerable<Player>;
             foreach (Player player in players)
             {
-                if (player.playerNum == 0)
+                if (player.playerNum == 1)
                 {
                     ScoreBlack.Text = Convert.ToString(player.Score);
                 }
-                else if (player.playerNum == 1)
+                else if (player.playerNum == 0)
                 {
                     ScoreRed.Text = Convert.ToString(player.Score);
                 }
