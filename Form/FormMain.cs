@@ -20,7 +20,7 @@ namespace Crazy_Checkers
         {
             InitializeComponent();
             game = new Game();
-            //game.ScoreEventHandler += (sender, e) => SetScore(sender, e, players);
+            game.ScoreEventHandler += SetScore;
             game.TurnChangeEventHandler += SetTurn;
             formAbout = new FormAbout();
             formSettings = new FormSettings();
@@ -41,9 +41,20 @@ namespace Crazy_Checkers
             }
         }
 
-        public void SetScore(object sender, EventArgs e, Player[,] players)
+        public void SetScore(object sender, EventArgs e)
         {
-
+            var players = sender as IEnumerable<Player>;
+            foreach (Player player in players)
+            {
+                if (player.playerNum == 0)
+                {
+                    ScoreBlack.Text = Convert.ToString(player.Score);
+                }
+                else if (player.playerNum == 1)
+                {
+                    ScoreRed.Text = Convert.ToString(player.Score);
+                }
+            }
         }
 
         public void SetTurn(object sender, EventArgs e)
@@ -77,6 +88,7 @@ namespace Crazy_Checkers
                     e.Cancel = true;
                     break;
                 default:
+                    Environment.Exit(0);
                     break;
             }
         }

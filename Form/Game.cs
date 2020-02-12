@@ -70,7 +70,7 @@ namespace Crazy_Checkers
                 CurrentPlayer = players[0];
             }
             EventArgs e = new EventArgs();
-            //ScoreEventHandler(players, e);
+            ScoreEventHandler(players, e);
             TurnChangeEventHandler(CurrentPlayer.playerNum, e);
         }
 

@@ -32,12 +32,12 @@ namespace Crazy_Checkers
         {
             this.TopPanelTable = new System.Windows.Forms.TableLayoutPanel();
             this.topPanel = new System.Windows.Forms.Panel();
+            this.blackTurnIndicator = new System.Windows.Forms.Label();
+            this.redTurnIndicator = new System.Windows.Forms.Label();
             this.BtnSettings = new System.Windows.Forms.Button();
             this.BtnAbout = new System.Windows.Forms.Button();
             this.ScoreRed = new System.Windows.Forms.Label();
             this.ScoreBlack = new System.Windows.Forms.Label();
-            this.redTurnIndicator = new System.Windows.Forms.Label();
-            this.blackTurnIndicator = new System.Windows.Forms.Label();
             this.TopPanelTable.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +71,30 @@ namespace Crazy_Checkers
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(782, 50);
             this.topPanel.TabIndex = 2;
+            // 
+            // blackTurnIndicator
+            // 
+            this.blackTurnIndicator.AutoSize = true;
+            this.blackTurnIndicator.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.blackTurnIndicator.ForeColor = System.Drawing.Color.Black;
+            this.blackTurnIndicator.Location = new System.Drawing.Point(317, 4);
+            this.blackTurnIndicator.Margin = new System.Windows.Forms.Padding(0);
+            this.blackTurnIndicator.Name = "blackTurnIndicator";
+            this.blackTurnIndicator.Size = new System.Drawing.Size(40, 38);
+            this.blackTurnIndicator.TabIndex = 5;
+            this.blackTurnIndicator.Text = "⬤";
+            // 
+            // redTurnIndicator
+            // 
+            this.redTurnIndicator.AutoSize = true;
+            this.redTurnIndicator.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.redTurnIndicator.ForeColor = System.Drawing.Color.Red;
+            this.redTurnIndicator.Location = new System.Drawing.Point(447, 4);
+            this.redTurnIndicator.Margin = new System.Windows.Forms.Padding(0);
+            this.redTurnIndicator.Name = "redTurnIndicator";
+            this.redTurnIndicator.Size = new System.Drawing.Size(40, 38);
+            this.redTurnIndicator.TabIndex = 4;
+            this.redTurnIndicator.Text = "⬤";
             // 
             // BtnSettings
             // 
@@ -115,30 +139,6 @@ namespace Crazy_Checkers
             this.ScoreBlack.Size = new System.Drawing.Size(39, 33);
             this.ScoreBlack.TabIndex = 0;
             this.ScoreBlack.Text = "00";
-            // 
-            // redTurnIndicator
-            // 
-            this.redTurnIndicator.AutoSize = true;
-            this.redTurnIndicator.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.redTurnIndicator.ForeColor = System.Drawing.Color.Red;
-            this.redTurnIndicator.Location = new System.Drawing.Point(316, 5);
-            this.redTurnIndicator.Margin = new System.Windows.Forms.Padding(0);
-            this.redTurnIndicator.Name = "redTurnIndicator";
-            this.redTurnIndicator.Size = new System.Drawing.Size(41, 39);
-            this.redTurnIndicator.TabIndex = 4;
-            this.redTurnIndicator.Text = "⬤";
-            // 
-            // blackTurnIndicator
-            // 
-            this.blackTurnIndicator.AutoSize = true;
-            this.blackTurnIndicator.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.blackTurnIndicator.ForeColor = System.Drawing.Color.Black;
-            this.blackTurnIndicator.Location = new System.Drawing.Point(447, 5);
-            this.blackTurnIndicator.Margin = new System.Windows.Forms.Padding(0);
-            this.blackTurnIndicator.Name = "blackTurnIndicator";
-            this.blackTurnIndicator.Size = new System.Drawing.Size(41, 39);
-            this.blackTurnIndicator.TabIndex = 5;
-            this.blackTurnIndicator.Text = "⬤";
             // 
             // FormMain
             // 
