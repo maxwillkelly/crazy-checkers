@@ -35,10 +35,8 @@ namespace Crazy_Checkers
 
         public void BtnSettings_Click(object sender, EventArgs e)
         {
-            if (formSettings.ShowDialog() == DialogResult.OK)
-            {
-                game.SetSettings(ref formSettings);
-            }
+            formSettings.ShowDialog();
+            game.SetSettings(ref formSettings);
         }
 
         public void SetScore(object sender, EventArgs e)

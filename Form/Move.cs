@@ -7,8 +7,9 @@ namespace Crazy_Checkers
 {
     public class Move
     {
-        public uint[] Current { get; set; }
-        public uint[] Target { get; set; }
+        public Counter Current { get; set; }
+        public Counter Target { get; set; }
+        public Counter Taken { get; set; }
 
         public Move()
         {
@@ -16,15 +17,19 @@ namespace Crazy_Checkers
         }
 
         // Returns true if a position has been placed
-        public bool AddUnit(uint col, uint row, uint color)
+        public bool AddUnit(uint col, uint row, uint color, bool king = false)
         {
-            if (Current[2] == 0)
+            if (Current.Used == false)
             {
-                Current = new uint[4] { col, row, color, 1 };
+                Current = new Counter(col, row, color, king);
             }
-            else if (Target[2] == 0)
+            else if (Target.Used == false)
             {
-                Target = new uint[4] { col, row, color, 1 };
+                Target = new Counter(col, row, color, king);
+            }
+            else if (Taken.Used == false)
+            {
+                Taken = new Counter(col, row, color, king);
             }
             else
             {
@@ -33,9 +38,9 @@ namespace Crazy_Checkers
             return true;
         }
 
-        public bool isFull()
+        public bool isAlmostFull()
         {
-            if (Current[3] == 1 && Target[3] == 1)
+            if (Current.Used == true && Target.Used == true)
             {
                 return true;
             }
@@ -44,30 +49,26 @@ namespace Crazy_Checkers
 
         public bool isBlank()
         {
-            if (Current[3] == 0)
+            if (Current.Used == false)
             {
                 return true;
             }
             return false;
         }
 
-        public void printMove()
+        public bool useTaken()
         {
-            Console.WriteLine("Current: Col: " + Current[0]);
-            Console.WriteLine("         Row: " + Current[1]);
-            Console.WriteLine("         Color: " + Current[2]);
-
-            if (Target[2] != 0)
+            if (Taken.Used == true)
             {
-                Console.WriteLine("Target: Col: " + Target[0]);
-                Console.WriteLine("         Row: " + Target[1]);
-                Console.WriteLine("         Color: " + Target[2]);
+                return true;
             }
+            return false;
         }
         public void ResetUnit()
         {
-            Current = new uint[4];
-            Target = new uint[4];
+            Current = new Counter();
+            Target = new Counter();
+            Taken = new Counter();
         }
     }
 }
