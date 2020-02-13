@@ -16,8 +16,8 @@ namespace Crazy_Checkers
 
         public uint Column { get; set; }
         public uint Row { get; set; }
-        public bool isKing { get { return _isKing; } set { _isKing = value; KingChanged(); } }
-        private bool _isKing;
+        public bool King { get { return _King; } set { _King = value; KingChanged(); } }
+        private bool _King;
         // 0 indicates black, 1 indicates red, 2 indicates blank
         public uint Color { get { return _Color; } set { _Color = value; ColorChanged(); } }
         private uint _Color;
@@ -30,7 +30,7 @@ namespace Crazy_Checkers
             Row = row;
             MakeButton();
             Color = color;
-            isKing = false;
+            King = false;
             // Names button based on location
             Name = "Btn_" + col + "_" + row;
         }
@@ -95,7 +95,7 @@ namespace Crazy_Checkers
 
         private void KingChanged()
         {
-            switch (isKing)
+            switch (King)
             {
                 case true:
                     Text = "👑";

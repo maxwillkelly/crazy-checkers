@@ -93,7 +93,7 @@ namespace Crazy_Checkers
             Position position = (Position)sender;
             uint col = position.Column;
             uint row = position.Row;
-            bool king = position.isKing;
+            bool king = position.King;
 
             Position chosen = MainGrid.GetPosition(position.Column, position.Row);
 

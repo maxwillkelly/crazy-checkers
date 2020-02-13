@@ -43,16 +43,8 @@ namespace Crazy_Checkers
 
         private bool GenValidMove(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition)
         {
-            // Checks if the piece is blank
-            bool blank = grid.GetPosition(col, row).isBlank();
-            bool king = grid.GetPosition(col, row).isKing;
-            bool forward = CheckForward(ref grid, ref move, col, row, playerNum, opposition) || king;
-            double piecesAway = CheckPiecesAway(ref move, col, row);
-            bool pieceTaken = CheckPieceTaken(ref grid, ref move, col, row, playerNum, piecesAway, blank, forward);
-            bool standard = blank && forward && piecesAway == Math.Sqrt(2);
-            
             // standard and taken
-            if (standard || pieceTaken)
+            if (CheckStandard(ref grid, ref move, col, row, playerNum, opposition) || CheckPieceTaken(ref grid, ref move, col, row, playerNum, opposition))
             {
                 grid.SetSquareColor(col, row, 3);
                 return true;
@@ -60,56 +52,56 @@ namespace Crazy_Checkers
             return false;
         }
 
-        private double CheckPiecesAway(ref Move move, uint col, uint row)
+        private double CheckPiecesAway(Counter c, uint col, uint row)
         {
-            int xDist = Convert.ToInt32(move.Current.Col) - Convert.ToInt32(col);
-            int yDist = Convert.ToInt32(move.Current.Row) - Convert.ToInt32(row);
+            int xDist = Convert.ToInt32(c.Col) - Convert.ToInt32(col);
+            int yDist = Convert.ToInt32(c.Row) - Convert.ToInt32(row);
             double squaredDist = Math.Pow(xDist, 2) + Math.Pow(yDist, 2);
             return Math.Sqrt(squaredDist);
         }
 
+        private bool CheckStandard(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition) {
+          // Checks if the piece is blank
+          bool blank = grid.GetPosition(col, row).isBlank();
+          // 2. Check we are going forward or the piece is a king
+          bool king = grid.GetPosition(move.Current.Col, move.Current.Col).King;
+          bool forward = CheckForward(ref grid, ref move, col, row, playerNum, opposition);
+          double piecesAway = CheckPiecesAway(move.Current, col, row);
+          return blank && (forward || king) && piecesAway == Math.Sqrt(2);
+        }
+
         // Checks if a piece is being taken from another player
-        private bool CheckPieceTaken(ref Grid grid, ref Move move, uint col, uint row, uint opposition, double piecesAway, bool blank, bool forward)
+        private bool CheckPieceTaken(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition)
         {
-            // Things to do:
-            // 1. Get the current piece extracted from move
-            // 2. Check the distance between the current and the target (col/row) is 8^1/2
-            // 3. Calculate taken by getting the average point between current and target
-            // 4. Check the distance between current and taken is 2^1/2
-            // 5. Check the distance between taken and target is 2^1/2
-            // 6. Check that the target is owned by the opposition
-
-            /*
-            // Opposition is actually playerNum
-            int betweenRow, betweenCol;
-            // Flipped
-            int moveCol = Convert.ToInt32(move.Current.Row);
-            int moveRow = Convert.ToInt32(move.Current.Col);
-
-            for (int i = -1; i <= 1; i += 2)
+            if (col == 1 && row == 2)
             {
-                for (int j = -1; j <= 1; j += 2)
+                Console.WriteLine("Dog");
+            }
+            // Things to do:
+            // 1. Check the target is blank
+            bool blank = grid.GetPosition(col, row).isBlank();
+            // 2. Check we are going forward or the piece is a king
+            bool king = grid.GetPosition(move.Current.Col, move.Current.Col).King;
+            bool forward = CheckForward(ref grid, ref move, col, row, playerNum, opposition);
+            // 3. Check the distance between the current and the target (col/row) is 8^1/2
+            bool currentTarget = CheckPiecesAway(move.Current, col, row) == Math.Sqrt(8);
+            // 4. Calculate taken by getting the average point between current and target
+            move.Taken.Col = (col + move.Current.Col)/2;
+            move.Taken.Row = (row + move.Current.Row)/2;
+
+            // 5. Check the distance between current and taken is 2^1/2
+            if (move.Taken.Col >= 0 && move.Taken.Col < Columns && move.Taken.Row >= 0 && move.Taken.Row < Rows) {
+                bool currentTaken = CheckPiecesAway(move.Current, move.Taken.Col, move.Taken.Row) == Math.Sqrt(2);
+                // 6. Check the distance between taken and target is 2^1/2
+                bool takenTarget = CheckPiecesAway(move.Taken, col, row) == Math.Sqrt(2);
+                // 7. Check that taken is owned by the opposition
+                bool ownedByOpposition = grid.GetPosition(move.Taken.Col, move.Taken.Row).Color == opposition;
+                if (blank && (forward || king) && currentTarget && currentTaken && takenTarget && ownedByOpposition)
                 {
-                    betweenCol = moveCol + i;
-                    betweenRow = moveRow + j;
-                    // Checks the position we're looking up on on the grid
-                    bool inGrid = betweenCol >= 0 && betweenRow >= 0 && betweenCol < Columns && betweenRow < Rows;
-                    bool ownedByOpposition = false;
-                    bool isCurrent = true;
-                    if (inGrid) {
-                        ownedByOpposition = grid.GetPosition(Convert.ToUInt32(betweenCol), Convert.ToUInt32(betweenRow)).Color == opposition;
-                        //isCurrent = moveCol == betweenCol && moveRow == betweenRow;
-                    }
-                    // Checks if this meets all the conditions
-                    if (inGrid && ownedByOpposition && piecesAway == Math.Sqrt(8) && blank && forward && isCurrent)
-                    {
-                        Taken[col, row] = new Counter(Convert.ToUInt32(betweenCol), Convert.ToUInt32(betweenRow), opposition);
-                        Console.WriteLine("Taken Option:\tCol:{0}\tRow:{1}\tfor Piece:\tCol:{2}\tRow:{3}", betweenCol, betweenRow, col, row);
-                        Console.WriteLine("MoveCol: {0}\tMoveRow: {1}",moveCol,moveRow);
-                        return true;
-                    }
+                    Taken[col, row] = new Counter(Convert.ToUInt32(move.Taken.Col), Convert.ToUInt32(move.Taken.Row), opposition);
+                    return true;
                 }
-            }*/
+            }
             return false;
         }
 
