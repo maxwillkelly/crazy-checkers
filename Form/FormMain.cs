@@ -39,12 +39,6 @@ namespace Crazy_Checkers
             game.SetSettings(ref formSettings);
         }
 
-        private void BtnHelp_Click(object sender, EventArgs e)
-        {
-            string message = "How to Play:\nAt the top of the screen will be a colour red or black indicating whose turn it is to play.";
-            MessageBox.Show(message, "Help");
-        }
-
         public void SetScore(object sender, EventArgs e)
         {
             var players = sender as IEnumerable<Player>;

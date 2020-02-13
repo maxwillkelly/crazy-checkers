@@ -34,9 +34,15 @@ namespace Crazy_Checkers
 
         private void BtnLoad_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The Load/Save features of Crazy Checkers are not yet implemented");
+            BtnHelp_Click(sender, e);
+            //MessageBox.Show("The Load/Save features of Crazy Checkers are not yet implemented");
         }
 
+        private void BtnHelp_Click(object sender, EventArgs e)
+        {
+            string message = "How to Play:\nAt the top of the screen will be a colour red or black indicating whose turn it is to play.";
+            MessageBox.Show(message, "Help");
+        }
         private void BtnSettings_Click(object sender, EventArgs e)
         {
             formMain.BtnSettings_Click(sender, e);
