@@ -136,7 +136,7 @@ namespace Crazy_Checkers
             else
             {
                 PositionArray[col, row].Color = color;
-                PositionArray[col, row].isKing = isKing;
+                PositionArray[col, row].King = isKing;
             }
         }
 
