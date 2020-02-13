@@ -16,7 +16,8 @@ namespace Crazy_Checkers
 
         public uint Column { get; set; }
         public uint Row { get; set; }
-        public bool isKing { get; set; }
+        public bool isKing { get { return _isKing; } set { _isKing = value; KingChanged(); } }
+        private bool _isKing;
         // 0 indicates black, 1 indicates red, 2 indicates blank
         public uint Color { get { return _Color; } set { _Color = value; ColorChanged(); } }
         private uint _Color;
@@ -63,6 +64,9 @@ namespace Crazy_Checkers
                 case 2:
                     Text = "";
                     break;
+                case 3:
+                    Text = "👑";
+                    break;
                 default:
                     throw new Exception("The color has attempted to be changed to an invalid value");
             }
@@ -86,6 +90,16 @@ namespace Crazy_Checkers
                     break;
                 default:
                     throw new Exception("The color has attempted to be changed to an invalid value");
+            }
+        }
+
+        private void KingChanged()
+        {
+            switch (isKing)
+            {
+                case true:
+                    Text = "👑";
+                    break;
             }
         }
 

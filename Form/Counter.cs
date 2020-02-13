@@ -27,5 +27,10 @@ namespace Crazy_Checkers
             King = king;
             Used = used;
         }
+
+        public void printMove()
+        {
+            Console.WriteLine("Col: {0}\tRow: {1}\tColor: {2}\tKing: {3}\tUsed: {4}", Col, Row, Color, King, Used);
+        }
     }
 }

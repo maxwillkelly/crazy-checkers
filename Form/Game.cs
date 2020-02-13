@@ -49,9 +49,9 @@ namespace Crazy_Checkers
             // Creates two players
             players = new Player[2];
             // Initialises each player
-            for (uint i = 0; i < players.Length; i++)
+            for (int i = 1; i >= 0; i--)
             {
-                players[i] = new Player(colSize, rowSize, i);
+                players[i] = new Player(colSize, rowSize, Convert.ToUInt32(i), true);
             }
             // Sets the current player to 0
             CurrentPlayer = players[0];
@@ -69,9 +69,21 @@ namespace Crazy_Checkers
             {
                 CurrentPlayer = players[0];
             }
-            EventArgs e = new EventArgs();
-            ScoreEventHandler(players, e);
-            TurnChangeEventHandler(CurrentPlayer.playerNum, e);
+            if (CurrentPlayer.playable)
+            {
+                EventArgs e = new EventArgs();
+                ScoreEventHandler(players, e);
+                TurnChangeEventHandler(CurrentPlayer.playerNum, e);
+            }
+            else
+            {
+                Finish();
+            }
+        }
+
+        public void Finish()
+        {
+            MessageBox.Show("So someone won!");
         }
 
         // Runs when a position is clicked in the grid
@@ -109,16 +121,21 @@ namespace Crazy_Checkers
             // Checks if the position we have clicked on is a valid move
             else if (CurrentPlayer.GetValidMove(col, row))
             {
-                Counter taken = CurrentPlayer.GetTaken(trailMove.Current.Col, trailMove.Current.Row);
+                Counter taken = CurrentPlayer.GetTaken(col, row);
                 // Checks if a piece is needs to be taken
                 if (taken.Used)
                 {
+                    // trailMove.printMove();
                     // Takes an opponent's piece
                     MainGrid.SetPosition(taken.Col, taken.Row, 2, taken.King);
                     CurrentPlayer.Score++;
                 }
+                if (row == 0 || row == colSize - 1)
+                {
+                    trailMove.Current.King = true;
+                }
                 // Removes the counter from its previous position
-                MainGrid.SetPosition(trailMove.Current.Col, trailMove.Current.Row, 2, trailMove.Taken.King);
+                MainGrid.SetPosition(trailMove.Current.Col, trailMove.Current.Row, 2, false);
                 // Adds the counter in its new position
                 MainGrid.SetPosition(col, row, CurrentPlayer.playerNum, trailMove.Current.King);
                 trailMove.ResetUnit();

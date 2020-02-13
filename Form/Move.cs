@@ -70,5 +70,16 @@ namespace Crazy_Checkers
             Target = new Counter();
             Taken = new Counter();
         }
+
+        public void printMove()
+        {
+            Console.Write("Current:\t");
+            Current.printMove();
+            Console.Write("Target:\t");
+            Target.printMove();
+            Console.Write("Taken:\t");
+            Taken.printMove();
+
+        }
     }
 }
