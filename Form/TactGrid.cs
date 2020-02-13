@@ -9,14 +9,19 @@ namespace Crazy_Checkers
 {
     public class TactGrid
     {
+        // Dimensions
         private uint Columns = 8;
         private uint Rows = 8;
+
+        // Stores whether a player can move to the appropriate position
         private bool[,] ValidMove;
-        // Stores counter than need to be taken
+        // Stores a counter that will be removed from the grid if the player moves to this position
         private Counter[,] Taken;
 
+        // Constructor
         public TactGrid(uint Columns, uint Rows)
         {
+            // Initialises global variables
             this.Columns = Columns;
             this.Rows = Rows;
             ValidMove = new bool[Columns, Rows];
@@ -26,16 +31,23 @@ namespace Crazy_Checkers
         // Returns true if the player can move
         public bool Gen(ref Grid grid, ref Move move, uint playerNum, uint opposition)
         {
+            // Declares that the player can't play unil proven otherwise
             bool playable = false;
+            // Loops through each square in the grid
             for (uint i = 0; i < Columns; i++)
             {
                 for (uint j = 0; j < Rows; j++)
                 {
+                    // Declares the player can't play here unil proven otherwise
                     ValidMove[i, j] = false;
+                    // Initialises the taken field
                     Taken[i, j] = new Counter();
+                    // Checks if the player can move to this location
                     if (GenValidMove(ref grid, ref move, i, j, playerNum, opposition))
                     {
+                        // Proves the player can play
                         playable = true;
+                        // Proves the player can play here
                         ValidMove[i, j] = true;
                     }
                 }
@@ -43,31 +55,39 @@ namespace Crazy_Checkers
             return playable;
         }
 
+        // Checks if the player can move to a specific location
         private bool GenValidMove(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition)
         {
-            // standard and taken
+            // Checks if the player can move forward or take away a piece
             if (CheckStandard(ref grid, ref move, col, row, playerNum, opposition) || CheckPieceTaken(ref grid, ref move, col, row, playerNum, opposition))
             {
+                // Highlights the appropriate square to tell the player they can move there
                 grid.SetSquareColor(col, row, 3);
                 return true;
             }
             return false;
         }
 
+        // Returns the distance between a counter and the position col and row
         private double CheckPiecesAway(Counter c, uint col, uint row)
         {
+            // Calculates the distance in each axis
             int xDist = Convert.ToInt32(c.Col) - Convert.ToInt32(col);
             int yDist = Convert.ToInt32(c.Row) - Convert.ToInt32(row);
+            // Uses Pythagorus' Theorem to calculate the displacement
             double squaredDist = Math.Pow(xDist, 2) + Math.Pow(yDist, 2);
             return Math.Sqrt(squaredDist);
         }
 
+        // Checks if the player can move forward on a specific location
         private bool CheckStandard(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition) {
-          // Checks if the piece is blank
+          // Checks if the target (col, row) is blank
           bool blank = grid.GetPosition(col, row).isBlank();
-          // 2. Check we are going forward or the piece is a king
+          // Checks if the piece we are moving is a king
           bool king = grid.GetPosition(move.Current.Col, move.Current.Col).King;
+          // Checks if the player is moving towards their opponent
           bool forward = CheckForward(ref grid, ref move, col, row, playerNum, opposition);
+          // 
           double piecesAway = CheckPiecesAway(move.Current, col, row);
           return blank && (forward || king) && piecesAway == Math.Sqrt(2);
         }
@@ -75,23 +95,18 @@ namespace Crazy_Checkers
         // Checks if a piece is being taken from another player
         private bool CheckPieceTaken(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition)
         {
-            if (col == 1 && row == 2)
-            {
-                Console.WriteLine("Dog");
-            }
-            // Things to do:
-            // 1. Check the target is blank
+            // Checks the target is blank
             bool blank = grid.GetPosition(col, row).isBlank();
-            // 2. Check we are going forward or the piece is a king
+            // Checks we are going forward or the piece is a king
             bool king = grid.GetPosition(move.Current.Col, move.Current.Col).King;
             bool forward = CheckForward(ref grid, ref move, col, row, playerNum, opposition);
-            // 3. Check the distance between the current and the target (col/row) is 8^1/2
+            // Checks the distance between the current and the target (col/row) is 8^1/2
             bool currentTarget = CheckPiecesAway(move.Current, col, row) == Math.Sqrt(8);
-            // 4. Calculate taken by getting the average point between current and target
+            // Calculates the piece we are taking away by getting the average point between current and target
             move.Taken.Col = (col + move.Current.Col)/2;
             move.Taken.Row = (row + move.Current.Row)/2;
 
-            // 5. Check the distance between current and taken is 2^1/2
+            // Checks the distance between current and taken is 2^1/2
             if (move.Taken.Col >= 0 && move.Taken.Col < Columns && move.Taken.Row >= 0 && move.Taken.Row < Rows) {
                 bool currentTaken = CheckPiecesAway(move.Current, move.Taken.Col, move.Taken.Row) == Math.Sqrt(2);
                 // 6. Check the distance between taken and target is 2^1/2
@@ -107,6 +122,7 @@ namespace Crazy_Checkers
             return false;
         }
 
+        // Checks if the player is moving towards their opponent
         private bool CheckForward(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition)
         {
             if (playerNum == 0)

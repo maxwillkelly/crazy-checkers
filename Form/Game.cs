@@ -6,8 +6,7 @@ namespace Crazy_Checkers
 {
     public class Game
     {
-        // Max: Instead of playersTurn and opposition I've set it to store the current player playing
-        // Max: You can access playerNum and opposition in the CurrentPlayer object
+        // Stores the player taking the turn
         private Player CurrentPlayer = null;
 
         // Grid Dimensions
@@ -70,14 +69,20 @@ namespace Crazy_Checkers
             {
                 CurrentPlayer = players[0];
             }
+            // Placeholder Event Arguments
             EventArgs e = new EventArgs();
+            // Sets the score in the form
             ScoreEventHandler(players, e);
+            // Changes the turn in the form
             TurnChangeEventHandler(CurrentPlayer.playerNum, e);
+            // Checks if the player has completed the game
             if (players[0].Score == 12 || players[1].Score == 12) {
+                // Ends the game
                 Finish();
             }
         }
 
+        // Ends the game
         public void Finish()
         {
             if (players[0].Score > players[1].Score) {
@@ -94,24 +99,14 @@ namespace Crazy_Checkers
         // Runs when a position is clicked in the grid
         public void ProcessBtn(object sender, EventArgs e)
         {
-            // 
+            // Converts the sender to its position type
             Position position = (Position)sender;
+            // Extracts information from the position
             uint col = position.Column;
             uint row = position.Row;
             bool king = position.King;
-
+            // Gets the position that the player has chosen
             Position chosen = MainGrid.GetPosition(position.Column, position.Row);
-
-                // this requires:
-                // 	- being able to check 4 diagonal spots around button
-                // 	- being able to check spots after opposition buttons 
-
-                // if opposition = 0 and CurrentPlayer = 1 (op: black, cur: red)
-                //      we check row - 1  (column += 1 and column += -1)
-                //  else 
-                //      we check row + 1 (column += 1 and column += -1)
-                // as the direction "forward" flips each turn
-
 
             // Checks if we haven't added a current
             if (chosen.Color == CurrentPlayer.playerNum && trailMove.isBlank())
@@ -130,11 +125,12 @@ namespace Crazy_Checkers
                 // Checks if a piece is needs to be taken
                 if (taken.Used)
                 {
-                    // trailMove.printMove();
                     // Takes an opponent's piece
-                    MainGrid.SetPosition(taken.Col, taken.Row, 2, taken.King);
+                    MainGrid.SetPosition(taken.Col, taken.Row, 2, false);
+                    // Increments the score
                     CurrentPlayer.Score++;
                 }
+                // Checks if a player has reached the end of the board
                 if (row == 0 || row == colSize - 1)
                 {
                     trailMove.Current.King = true;
@@ -150,13 +146,18 @@ namespace Crazy_Checkers
                 MainGrid.SetPosition(trailMove.Current.Col, trailMove.Current.Row, 2, false);
                 // Adds the counter in its new position
                 MainGrid.SetPosition(col, row, CurrentPlayer.playerNum, trailMove.Current.King);
+                // Resets the trailMove for the next turn
                 trailMove.ResetUnit();
+                // Gets rid of the selected and possible moves from the board
                 MainGrid.ResetSquareColor();
+                // Starts the next turn
                 Play();
             }
             else
             {
+                // Resets the trailMove for the next turn
                 trailMove.ResetUnit();
+                // Gets rid of the selected and possible moves from the board
                 MainGrid.ResetSquareColor();
             }
 
@@ -197,6 +198,7 @@ namespace Crazy_Checkers
             return playable;
         }
 
+        // Extracts the settings from the setting form
         public void SetSettings(ref FormSettings formSettings) {
             ruleSet = formSettings.ruleSet;
             colSize = Convert.ToUInt32(Math.Sqrt(formSettings.gridSize));
