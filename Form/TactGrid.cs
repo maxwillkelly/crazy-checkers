@@ -1,4 +1,5 @@
 ﻿using System;
+// Can you type?
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Crazy_Checkers
         private uint Columns = 8;
         private uint Rows = 8;
         private bool[,] ValidMove;
+        // Stores counter than need to be taken
         private Counter[,] Taken;
 
         public TactGrid(uint Columns, uint Rows)

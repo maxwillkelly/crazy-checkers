@@ -1,12 +1,9 @@
 ﻿using System;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Crazy_Checkers
 {
-
-    /*
-	 NOTE: The class design has changed so FormMain owns Grid not Game
-	*/
     public class Game
     {
         // Max: Instead of playersTurn and opposition I've set it to store the current player playing
@@ -37,9 +34,13 @@ namespace Crazy_Checkers
         // Constructor
         public Game()
         {
+            // Sets the settings to defaults
+            ruleSet = 0;
+            sound = true;
             ResetGame();
         }
 
+        // Basically the constructor except for default settings
         public void ResetGame()
         {
             // Creates the main grid to store each position
@@ -49,7 +50,7 @@ namespace Crazy_Checkers
             // Creates two players
             players = new Player[2];
             // Initialises each player
-            for (int i = 1; i >= 0; i--)
+            for (uint i = 0; i < 2; i++)
             {
                 players[i] = new Player(colSize, rowSize, Convert.ToUInt32(i), true);
             }
@@ -69,21 +70,25 @@ namespace Crazy_Checkers
             {
                 CurrentPlayer = players[0];
             }
-            if (CurrentPlayer.playable)
-            {
-                EventArgs e = new EventArgs();
-                ScoreEventHandler(players, e);
-                TurnChangeEventHandler(CurrentPlayer.playerNum, e);
-            }
-            else
-            {
+            EventArgs e = new EventArgs();
+            ScoreEventHandler(players, e);
+            TurnChangeEventHandler(CurrentPlayer.playerNum, e);
+            if (players[0].Score == 12 || players[1].Score == 12) {
                 Finish();
             }
         }
 
         public void Finish()
         {
-            MessageBox.Show("So someone won!");
+            if (players[0].Score > players[1].Score) {
+                MessageBox.Show("So Black Player won apparently, Red Player's dad won't be happy!");
+            }
+            else if (players[0].Score < players[1].Score) {
+                MessageBox.Show("So Red Player won apparently, Black Player's dad won't be happy!");
+            }
+            else {
+                MessageBox.Show("You tied so you both lost in my playbook anyway! Daddy won't be happy.");
+            }
         }
 
         // Runs when a position is clicked in the grid
@@ -133,6 +138,13 @@ namespace Crazy_Checkers
                 if (row == 0 || row == colSize - 1)
                 {
                     trailMove.Current.King = true;
+                }
+                // Checks if the sound is enabled
+                if (sound) {
+                    // Plays when a move is taken
+                    var sound = new SoundPlayer("../../audio/notifyShort.wav");
+                    // Plays the notification sound
+                    sound.Play();
                 }
                 // Removes the counter from its previous position
                 MainGrid.SetPosition(trailMove.Current.Col, trailMove.Current.Row, 2, false);
