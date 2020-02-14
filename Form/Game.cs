@@ -75,24 +75,36 @@ namespace Crazy_Checkers
             ScoreEventHandler(players, e);
             // Changes the turn in the form
             TurnChangeEventHandler(CurrentPlayer.playerNum, e);
+            if (CurrentPlayer.Score == 1)
+            {
+                Finish();
+            }
             // Checks if the player has completed the game
-            if (players[0].Score == 12 || players[1].Score == 12) {
+            if (!CurrentPlayer.GeneratePlayable(ref MainGrid)) {
                 // Ends the game
                 Finish();
             }
         }
-
         // Ends the game
         public void Finish()
         {
+            string text;
             if (players[0].Score > players[1].Score) {
-                MessageBox.Show("So Black Player won apparently, Red Player's dad won't be happy!");
+                text = "So Black Player won apparently, Red Player's dad won't be happy!";
             }
             else if (players[0].Score < players[1].Score) {
-                MessageBox.Show("So Red Player won apparently, Black Player's dad won't be happy!");
+                text = "So Red Player won apparently, Black Player's dad won't be happy!";
             }
             else {
-                MessageBox.Show("You tied so you both lost in my playbook anyway! Daddy won't be happy.");
+                text = "You tied so you both lost in my playbook anyway! Daddy won't be happy.";
+            }
+            text += " Anyways you wanna play again?";
+            if (MessageBox.Show(text, "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                
+            }
+            else {
+                Environment.Exit(0);
             }
         }
 
@@ -112,7 +124,7 @@ namespace Crazy_Checkers
             if (chosen.Color == CurrentPlayer.playerNum && trailMove.isBlank())
             {
                 // Adds the positon we have selected to the trialGrid
-                trailMove.AddUnit(col, row, chosen.Color);
+                trailMove.AddUnit(col, row, chosen.Color, chosen.King);
                 // Determines which moves the player can play with the current piece selected
                 CurrentPlayer.GenerateTactGrid(ref MainGrid, ref trailMove);
                 // Sets the square colour of the piece we have clicked on to indicate it has been selected
@@ -122,14 +134,6 @@ namespace Crazy_Checkers
             else if (CurrentPlayer.GetValidMove(col, row))
             {
                 Counter taken = CurrentPlayer.GetTaken(col, row);
-                // Checks if a piece is needs to be taken
-                if (taken.Used)
-                {
-                    // Takes an opponent's piece
-                    MainGrid.SetPosition(taken.Col, taken.Row, 2, false);
-                    // Increments the score
-                    CurrentPlayer.Score++;
-                }
                 // Checks if a player has reached the end of the board
                 if (row == 0 || row == colSize - 1)
                 {
@@ -146,12 +150,23 @@ namespace Crazy_Checkers
                 MainGrid.SetPosition(trailMove.Current.Col, trailMove.Current.Row, 2, false);
                 // Adds the counter in its new position
                 MainGrid.SetPosition(col, row, CurrentPlayer.playerNum, trailMove.Current.King);
+                if (taken.Used)
+                {   // Takes an opponent's piece
+                    MainGrid.SetPosition(taken.Col, taken.Row, 2, false);
+                    // Increments the score
+                    CurrentPlayer.Score++;
+                    // Sets the score in the form
+                    ScoreEventHandler(players, e);
+                }
+                else
+                {
+                    // Starts the next turn
+                    Play();
+                }
                 // Resets the trailMove for the next turn
                 trailMove.ResetUnit();
                 // Gets rid of the selected and possible moves from the board
                 MainGrid.ResetSquareColor();
-                // Starts the next turn
-                Play();
             }
             else
             {
@@ -169,7 +184,7 @@ namespace Crazy_Checkers
             // - Check the piece is moving towards the opponent ✅
             // - Standard take:
             // - Check its diagonal ✅
-            // - Check the target is two pieces away
+            // - Check the target is two pieces away ✅
             // - Check an opponent player is between current and taken ✅
             // - King:
             // - Check if position is at end of board (turn into King) : Position.King = True

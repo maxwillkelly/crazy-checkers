@@ -24,13 +24,13 @@ namespace Crazy_Checkers
         public uint SquareColor { get { return _SquareColor; } set { _SquareColor = value; SquareColorChanged(); } }
         private uint _SquareColor;
 
-        public Position(uint col, uint row, uint color)
+        public Position(uint col, uint row, uint color, bool king)
         {
             Column = col;
             Row = row;
             MakeButton();
             Color = color;
-            King = false;
+            King = king;
             // Names button based on location
             Name = "Btn_" + col + "_" + row;
         }
@@ -127,23 +127,6 @@ namespace Crazy_Checkers
                 return true;
             }
             return false;
-        }
-
-        public override bool Equals(System.Object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-            
-            Position Position = obj as Position;
-            
-            if ((System.Object)Position == null)
-            {
-                return false;
-            }
-
-            return Row == Position.Row && Column == Position.Column;
         }
     }
 }

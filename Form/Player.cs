@@ -26,9 +26,15 @@ namespace Crazy_Checkers {
 			}
 		}
 
+        public bool GeneratePlayable(ref Grid grid)
+        {
+            playable = tactGrid.CheckPlayable(ref grid, playerNum, opposition);
+            return playable;
+        }
+
 		public void GenerateTactGrid(ref Grid grid, ref Move move)
 		{
-			playable = tactGrid.Gen(ref grid, ref move, playerNum, opposition);
+			tactGrid.Gen(ref grid, ref move, playerNum, opposition);
 		}
 
 		public bool GetValidMove(uint col, uint row)

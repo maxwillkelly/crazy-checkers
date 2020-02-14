@@ -28,7 +28,33 @@ namespace Crazy_Checkers
             Taken = new Counter[Columns, Rows];
         }
 
-        // Returns true if the player can move
+        // Checks if the player can move from any square
+        public bool CheckPlayable(ref Grid grid, uint playerNum, uint opposition)
+        {
+            // Loops through each square in the grid
+            for (uint i = 0; i < Columns; i++)
+            {
+                for (uint j = 0; j < Rows; j++)
+                {
+                    // Checks if this position is owned by the current player
+                    if (grid.GetPosition(i,j).Color == playerNum)
+                    {
+                        Move m = new Move();
+                        m.AddUnit(i, j, playerNum, grid.GetPosition(i, j).King);
+                        // Checks if the player can move from this square
+                        if (Gen(ref grid, ref m, playerNum, opposition))
+                        {
+                            // Finds the player can move from a particular square
+                            return true;
+                        }
+                    }
+                }
+            }
+            // Finds the player cannot move from any square
+            return false;
+        }
+
+        // Returns true if the player can move from the square (col, row)
         public bool Gen(ref Grid grid, ref Move move, uint playerNum, uint opposition)
         {
             // Declares that the player can't play unil proven otherwise
@@ -84,7 +110,7 @@ namespace Crazy_Checkers
           // Checks if the target (col, row) is blank
           bool blank = grid.GetPosition(col, row).isBlank();
           // Checks if the piece we are moving is a king
-          bool king = grid.GetPosition(move.Current.Col, move.Current.Col).King;
+          bool king = move.Current.King;
           // Checks if the player is moving towards their opponent
           bool forward = CheckForward(ref grid, ref move, col, row, playerNum, opposition);
           // 
@@ -98,7 +124,7 @@ namespace Crazy_Checkers
             // Checks the target is blank
             bool blank = grid.GetPosition(col, row).isBlank();
             // Checks we are going forward or the piece is a king
-            bool king = grid.GetPosition(move.Current.Col, move.Current.Col).King;
+            bool king = move.Current.King;
             bool forward = CheckForward(ref grid, ref move, col, row, playerNum, opposition);
             // Checks the distance between the current and the target (col/row) is 8^1/2
             bool currentTarget = CheckPiecesAway(move.Current, col, row) == Math.Sqrt(8);
