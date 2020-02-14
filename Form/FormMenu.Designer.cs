@@ -55,7 +55,7 @@
             this.Divider.RowCount = 2;
             this.Divider.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.Divider.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.Divider.Size = new System.Drawing.Size(537, 487);
+            this.Divider.Size = new System.Drawing.Size(600, 598);
             this.Divider.TabIndex = 0;
             // 
             // BtnLoad
@@ -70,14 +70,14 @@
             this.BtnLoad.Font = new System.Drawing.Font("Forte", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnLoad.ForeColor = System.Drawing.SystemColors.Control;
             this.BtnLoad.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.BtnLoad.Location = new System.Drawing.Point(0, 243);
+            this.BtnLoad.Location = new System.Drawing.Point(0, 299);
             this.BtnLoad.Margin = new System.Windows.Forms.Padding(0);
             this.BtnLoad.Name = "BtnLoad";
-            this.BtnLoad.Padding = new System.Windows.Forms.Padding(0, 80, 0, 0);
+            this.BtnLoad.Padding = new System.Windows.Forms.Padding(0, 217, 0, 0);
             this.BtnLoad.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.BtnLoad.Size = new System.Drawing.Size(268, 244);
+            this.BtnLoad.Size = new System.Drawing.Size(300, 299);
             this.BtnLoad.TabIndex = 2;
-            this.BtnLoad.Text = "Load Game";
+            this.BtnLoad.Text = "Help";
             this.BtnLoad.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.BtnLoad.UseVisualStyleBackColor = true;
             this.BtnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
@@ -94,12 +94,12 @@
             this.BtnSettings.Font = new System.Drawing.Font("Forte", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSettings.ForeColor = System.Drawing.SystemColors.Control;
             this.BtnSettings.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.BtnSettings.Location = new System.Drawing.Point(268, 243);
+            this.BtnSettings.Location = new System.Drawing.Point(300, 299);
             this.BtnSettings.Margin = new System.Windows.Forms.Padding(0);
             this.BtnSettings.Name = "BtnSettings";
-            this.BtnSettings.Padding = new System.Windows.Forms.Padding(0, 144, 0, 0);
+            this.BtnSettings.Padding = new System.Windows.Forms.Padding(0, 178, 0, 0);
             this.BtnSettings.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.BtnSettings.Size = new System.Drawing.Size(269, 244);
+            this.BtnSettings.Size = new System.Drawing.Size(300, 299);
             this.BtnSettings.TabIndex = 1;
             this.BtnSettings.Text = "Settings";
             this.BtnSettings.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -121,9 +121,9 @@
             this.Btn1Player.Location = new System.Drawing.Point(0, 0);
             this.Btn1Player.Margin = new System.Windows.Forms.Padding(0);
             this.Btn1Player.Name = "Btn1Player";
-            this.Btn1Player.Padding = new System.Windows.Forms.Padding(0, 0, 0, 24);
+            this.Btn1Player.Padding = new System.Windows.Forms.Padding(0, 0, 0, 31);
             this.Btn1Player.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Btn1Player.Size = new System.Drawing.Size(268, 243);
+            this.Btn1Player.Size = new System.Drawing.Size(300, 299);
             this.Btn1Player.TabIndex = 0;
             this.Btn1Player.Text = "Single Player";
             this.Btn1Player.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -142,11 +142,11 @@
             this.Btn2Player.Font = new System.Drawing.Font("Forte", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn2Player.ForeColor = System.Drawing.SystemColors.Control;
             this.Btn2Player.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Btn2Player.Location = new System.Drawing.Point(268, 0);
+            this.Btn2Player.Location = new System.Drawing.Point(300, 0);
             this.Btn2Player.Margin = new System.Windows.Forms.Padding(0);
             this.Btn2Player.Name = "Btn2Player";
-            this.Btn2Player.Padding = new System.Windows.Forms.Padding(0, 0, 0, 48);
-            this.Btn2Player.Size = new System.Drawing.Size(269, 243);
+            this.Btn2Player.Padding = new System.Windows.Forms.Padding(0, 0, 0, 59);
+            this.Btn2Player.Size = new System.Drawing.Size(300, 299);
             this.Btn2Player.TabIndex = 3;
             this.Btn2Player.Text = "Dual Player";
             this.Btn2Player.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -155,13 +155,14 @@
             // 
             // FormMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 487);
+            this.ClientSize = new System.Drawing.Size(600, 598);
             this.Controls.Add(this.Divider);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(555, 534);
-            this.MinimumSize = new System.Drawing.Size(555, 534);
+            this.MaximumSize = new System.Drawing.Size(622, 654);
+            this.MinimumSize = new System.Drawing.Size(622, 654);
             this.Name = "FormMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crazy Checkers";

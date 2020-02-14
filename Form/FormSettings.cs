@@ -12,6 +12,7 @@ namespace Crazy_Checkers
 {
     public partial class FormSettings : Form
     {
+        // Stores the settings variables
         public int ruleSet { get; set; }
         public int gridSize { get; set; }
         public bool sound { get; set; }
@@ -20,10 +21,10 @@ namespace Crazy_Checkers
         public FormSettings()
         {
             InitializeComponent();
+            // Set the defaults
             ruleSet = 0;
             gridSize = 64;
             sound = true;
-            // Sets default ruleset
             ruleSetComboBox.SelectedIndex = 0;
         }
 
@@ -41,6 +42,7 @@ namespace Crazy_Checkers
             gridSizeLabel.Text = Convert.ToString(gridSize);
             gridSizeTrackBar.Value = Convert.ToInt32(Math.Sqrt(Convert.ToDouble(gridSize)));
             soundCheckBox.Checked = sound;
+            // Hides the settings form
             Hide();
         }
 
@@ -50,6 +52,7 @@ namespace Crazy_Checkers
             ruleSet = ruleSetComboBox.SelectedIndex;
             gridSize = Convert.ToInt32(gridSizeUnitsLabel.Text);
             sound = soundCheckBox.Checked;
+            // Hides the settings form
             Hide();
         }
     }

@@ -16,16 +16,6 @@ namespace Crazy_Checkers
         // Stores each position so they can be accessed
         private Position[,] PositionArray;
 
-        // /* COMMENTS AREA
-        // We need to:
-        //     - set up a way to get the state of a piece selected
-        //     - set up a way to set the state of a piece
-
-        // We have done:
-        //     -     
-        
-        // */
-
         public Grid(uint colSize, uint rowSize)
         {
             // Adds dimesnions from parameters
@@ -83,7 +73,7 @@ namespace Crazy_Checkers
                     // Places button in array
                     ref Position btn = ref PositionArray[col, row];
                     // Creates button
-                    btn = new Position(col, row, 2);
+                    btn = new Position(col, row, 2, false);
                     // Adds button to Main form
                     Controls.Add(btn, Convert.ToInt32(col), Convert.ToInt32(row));
                     // Adds button event handler
@@ -121,7 +111,7 @@ namespace Crazy_Checkers
         }
 
         // Can be used to set all values of a position
-        public void SetPosition(uint col, uint row, uint color, bool isKing)
+        public void SetPosition(uint col, uint row, uint color, bool king)
         {
             // Checks for invalid dimensions
             if (col >= ColumnCount || row >= RowCount)
@@ -136,7 +126,7 @@ namespace Crazy_Checkers
             else
             {
                 PositionArray[col, row].Color = color;
-                PositionArray[col, row].King = isKing;
+                PositionArray[col, row].King = king;
             }
         }
 
