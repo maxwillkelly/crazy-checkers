@@ -1,5 +1,5 @@
 ﻿using System;
-// Can you type?
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,9 +42,8 @@ namespace Crazy_Checkers
                         Move m = new Move();
                         m.AddUnit(i, j, playerNum, grid.GetPosition(i, j).King);
                         // Checks if the player can move from this square
-                        if (Gen(ref grid, ref m, playerNum, opposition))
+                        if (Gen(ref grid, ref m, playerNum, opposition, false))
                         {
-                            // Finds the player can move from a particular square
                             return true;
                         }
                     }
@@ -55,7 +54,7 @@ namespace Crazy_Checkers
         }
 
         // Returns true if the player can move from the square (col, row)
-        public bool Gen(ref Grid grid, ref Move move, uint playerNum, uint opposition)
+        public bool Gen(ref Grid grid, ref Move move, uint playerNum, uint opposition, bool highlight)
         {
             // Declares that the player can't play unil proven otherwise
             bool playable = false;
@@ -69,7 +68,7 @@ namespace Crazy_Checkers
                     // Initialises the taken field
                     Taken[i, j] = new Counter();
                     // Checks if the player can move to this location
-                    if (GenValidMove(ref grid, ref move, i, j, playerNum, opposition))
+                    if (GenValidMove(ref grid, ref move, i, j, playerNum, opposition, highlight))
                     {
                         // Proves the player can play
                         playable = true;
@@ -82,13 +81,15 @@ namespace Crazy_Checkers
         }
 
         // Checks if the player can move to a specific location
-        private bool GenValidMove(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition)
+        private bool GenValidMove(ref Grid grid, ref Move move, uint col, uint row, uint playerNum, uint opposition, bool highlight)
         {
             // Checks if the player can move forward or take away a piece
             if (CheckStandard(ref grid, ref move, col, row, playerNum, opposition) || CheckPieceTaken(ref grid, ref move, col, row, playerNum, opposition))
             {
-                // Highlights the appropriate square to tell the player they can move there
-                grid.SetSquareColor(col, row, 3);
+                if (highlight) {
+                    // Highlights the appropriate square to tell the player they can move there
+                    grid.SetSquareColor(col, row, 3);
+                }
                 return true;
             }
             return false;
@@ -168,16 +169,19 @@ namespace Crazy_Checkers
             return false;
         }
 
+        // Checks the validity of a position
         public bool GetSquare(uint col, uint row)
         {
             return ValidMove[col, row];
         }
 
+        // Sets the validity of a position
         public void SetSquare(uint col, uint row, bool valid)
         {
             ValidMove[col, row] = valid;
         }
 
+        // gets the taken counter
         public Counter GetTaken(uint col, uint row)
         {
             return Taken[col, row];

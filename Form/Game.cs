@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Media;
 using System.Windows.Forms;
 
@@ -20,7 +21,6 @@ namespace Crazy_Checkers
         private Player[] players;
 
         // Settings
-        private int ruleSet;
         private bool sound;
 
         // Storage
@@ -34,7 +34,6 @@ namespace Crazy_Checkers
         public Game()
         {
             // Sets the settings to defaults
-            ruleSet = 0;
             sound = true;
             ResetGame();
         }
@@ -51,12 +50,13 @@ namespace Crazy_Checkers
             // Initialises each player
             for (uint i = 0; i < 2; i++)
             {
-                players[i] = new Player(colSize, rowSize, Convert.ToUInt32(i), true);
+                players[i] = new Player(colSize, rowSize, Convert.ToUInt32(i));
             }
             // Sets the current player to 0
             CurrentPlayer = players[0];
             trailMove = new Move();
         }
+
 
         public void Play()
         {
@@ -75,12 +75,8 @@ namespace Crazy_Checkers
             ScoreEventHandler(players, e);
             // Changes the turn in the form
             TurnChangeEventHandler(CurrentPlayer.playerNum, e);
-            if (CurrentPlayer.Score == 1)
-            {
-                Finish();
-            }
-            // Checks if the player has completed the game
-            if (!CurrentPlayer.GeneratePlayable(ref MainGrid)) {
+            // Checks if a player can no longer move
+            if (!players[0].GeneratePlayable(ref MainGrid) && !players[1].GeneratePlayable(ref MainGrid)) {
                 // Ends the game
                 Finish();
             }
@@ -88,22 +84,28 @@ namespace Crazy_Checkers
         // Ends the game
         public void Finish()
         {
+            // Stores information displayed to the player
             string text;
+            // Checks if Black won
             if (players[0].Score > players[1].Score) {
-                text = "So Black Player won apparently, Red Player's dad won't be happy!";
+                text = "Black";
             }
+            // Checks if Red won
             else if (players[0].Score < players[1].Score) {
-                text = "So Red Player won apparently, Black Player's dad won't be happy!";
+                text = "Red";
             }
+            // Checks if there was a draw
             else {
-                text = "You tied so you both lost in my playbook anyway! Daddy won't be happy.";
+                text = "Neither of you";
             }
-            text += " Anyways you wanna play again?";
+            text += " won the game, Congratulations! Anyways would you play again? (Due to issues, both will just quit the game anyway)";
             if (MessageBox.Show(text, "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                
+                // Quits the application
+                Environment.Exit(0);
             }
             else {
+                // Quits the application
                 Environment.Exit(0);
             }
         }
@@ -116,7 +118,6 @@ namespace Crazy_Checkers
             // Extracts information from the position
             uint col = position.Column;
             uint row = position.Row;
-            bool king = position.King;
             // Gets the position that the player has chosen
             Position chosen = MainGrid.GetPosition(position.Column, position.Row);
 
@@ -133,40 +134,8 @@ namespace Crazy_Checkers
             // Checks if the position we have clicked on is a valid move
             else if (CurrentPlayer.GetValidMove(col, row))
             {
-                Counter taken = CurrentPlayer.GetTaken(col, row);
-                // Checks if a player has reached the end of the board
-                if (row == 0 || row == colSize - 1)
-                {
-                    trailMove.Current.King = true;
-                }
-                // Checks if the sound is enabled
-                if (sound) {
-                    // Plays when a move is taken
-                    var sound = new SoundPlayer("../../audio/notifyShort.wav");
-                    // Plays the notification sound
-                    sound.Play();
-                }
-                // Removes the counter from its previous position
-                MainGrid.SetPosition(trailMove.Current.Col, trailMove.Current.Row, 2, false);
-                // Adds the counter in its new position
-                MainGrid.SetPosition(col, row, CurrentPlayer.playerNum, trailMove.Current.King);
-                if (taken.Used)
-                {   // Takes an opponent's piece
-                    MainGrid.SetPosition(taken.Col, taken.Row, 2, false);
-                    // Increments the score
-                    CurrentPlayer.Score++;
-                    // Sets the score in the form
-                    ScoreEventHandler(players, e);
-                }
-                else
-                {
-                    // Starts the next turn
-                    Play();
-                }
-                // Resets the trailMove for the next turn
-                trailMove.ResetUnit();
-                // Gets rid of the selected and possible moves from the board
-                MainGrid.ResetSquareColor();
+                // Will move to the square (col, row) from the current position contained in trailMove
+                DoMove(col,row);
             }
             else
             {
@@ -175,51 +144,57 @@ namespace Crazy_Checkers
                 // Gets rid of the selected and possible moves from the board
                 MainGrid.ResetSquareColor();
             }
-
-            // validation to do:
-            // - Three categories of validation (Standard forward, standard take, king)
-            // - Standard forward:
-            // - Check its only 1 position : Target[1] - Current[1] == 1 ✅
-            // - Check the piece is blank : Target.Color ✅
-            // - Check the piece is moving towards the opponent ✅
-            // - Standard take:
-            // - Check its diagonal ✅
-            // - Check the target is two pieces away ✅
-            // - Check an opponent player is between current and taken ✅
-            // - King:
-            // - Check if position is at end of board (turn into King) : Position.King = True
-            // - Check diagonal positions behind and in front
-
-
-            // now we need to determine how we check if:
-            // 1. position isKing - Position.King
-            // 2. moving forward - if (Position.Target[1] > Positon.Current[1]) or if (Position.Target[1] < Positon.Current[1]) 
-            // 3. taking a piece - CheckPieceTaken() in TactGrid
         }
 
-        public bool AI()
+        // Will move to the square (col, row) from the current position contained in trailMove
+        public void DoMove(uint col, uint row)
         {
-            bool playable = false;
-            for (uint i = 0; i < colSize; i++)
+            Counter taken = CurrentPlayer.GetTaken(col, row);
+            // Checks if a player has reached the end of the board
+            if (row == 0 || row == colSize - 1)
             {
-                for (uint j = 0; j < rowSize; j++)
-                {
-                    if (MainGrid.GetPosition(i, j).Color == CurrentPlayer.playerNum)
-                    {
-
-                    }
-                }
+                trailMove.Current.King = true;
             }
-            return playable;
+            // Checks if the sound is enabled
+            if (sound)
+            {
+                // Plays when a move is taken
+                var sound = new SoundPlayer("../../audio/notifyShort.wav");
+                // Plays the notification sound
+                sound.Play();
+            }
+            // Removes the counter from its previous position
+            MainGrid.SetPosition(trailMove.Current.Col, trailMove.Current.Row, 2, false);
+            // Adds the counter in its new position
+            MainGrid.SetPosition(col, row, CurrentPlayer.playerNum, trailMove.Current.King);
+            if (taken.Used)
+            {   // Takes an opponent's piece
+                MainGrid.SetPosition(taken.Col, taken.Row, 2, false);
+                // Increments the score
+                CurrentPlayer.Score++;
+                // Sets the score in the form
+                ScoreEventHandler(players, new EventArgs());
+            }
+            else
+            {
+                // Starts the next turn
+                Play();
+            }
+            // Resets the trailMove for the next turn
+            trailMove.ResetUnit();
+            // Gets rid of the selected and possible moves from the board
+            MainGrid.ResetSquareColor();
         }
+
 
         // Extracts the settings from the setting form
+        // Commented due to issues reseting the form
         public void SetSettings(ref FormSettings formSettings) {
-            ruleSet = formSettings.ruleSet;
+            /*ruleSet = formSettings.ruleSet;
             colSize = Convert.ToUInt32(Math.Sqrt(formSettings.gridSize));
             rowSize = colSize;
             sound = formSettings.sound;
-            ResetGame();
+            ResetGame();*/
         }
     }
 }

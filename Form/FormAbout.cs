@@ -18,6 +18,7 @@ namespace Crazy_Checkers
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            // Hides the form
             Hide();
         }
     }

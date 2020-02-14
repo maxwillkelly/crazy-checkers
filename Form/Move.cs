@@ -7,15 +7,22 @@ namespace Crazy_Checkers
 {
     public class Move
     {
+
+        // 3 Pieces to work with in a "Move"
+        // Stores the place the player currently sits
         public Counter Current { get; set; }
+        // Stores where the player want to move
         public Counter Target { get; set; }
+        // Stores a piece taken away from a player
         public Counter Taken { get; set; }
 
+        // Creates a new Move
         public Move()
         {
             ResetUnit();
         }
 
+        // Adds to the appropriate variable similar to a queue so the current position is added first, then target and taken
         // Returns true if a position has been placed
         public bool AddUnit(uint col, uint row, uint color, bool king = false)
         {
@@ -38,15 +45,7 @@ namespace Crazy_Checkers
             return true;
         }
 
-        public bool isAlmostFull()
-        {
-            if (Current.Used == true && Target.Used == true)
-            {
-                return true;
-            }
-            return false;
-        }
-
+        // checks if current is blank
         public bool isBlank()
         {
             if (Current.Used == false)
@@ -56,30 +55,12 @@ namespace Crazy_Checkers
             return false;
         }
 
-        public bool useTaken()
-        {
-            if (Taken.Used == true)
-            {
-                return true;
-            }
-            return false;
-        }
+        // resets the current Move 
         public void ResetUnit()
         {
             Current = new Counter();
             Target = new Counter();
             Taken = new Counter();
-        }
-
-        public void printMove()
-        {
-            Console.Write("Current:\t");
-            Current.printMove();
-            Console.Write("Target:\t");
-            Target.printMove();
-            Console.Write("Taken:\t");
-            Taken.printMove();
-
         }
     }
 }

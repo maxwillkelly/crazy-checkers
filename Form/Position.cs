@@ -10,10 +10,6 @@ namespace Crazy_Checkers
 {
     public class Position : Button
     {
-        public Position() {
-            MakeButton();
-        }
-
         public uint Column { get; set; }
         public uint Row { get; set; }
         public bool King { get { return _King; } set { _King = value; KingChanged(); } }
@@ -24,6 +20,7 @@ namespace Crazy_Checkers
         public uint SquareColor { get { return _SquareColor; } set { _SquareColor = value; SquareColorChanged(); } }
         private uint _SquareColor;
 
+        // Creates a new Position
         public Position(uint col, uint row, uint color, bool king)
         {
             Column = col;
@@ -35,6 +32,7 @@ namespace Crazy_Checkers
             Name = "Btn_" + col + "_" + row;
         }
 
+        // Setting up Button designs
         private void MakeButton()
         {
             AutoSize = true;
@@ -49,6 +47,7 @@ namespace Crazy_Checkers
             //UseVisualStyleBackColor = true;
         }
 
+        // Sets the icon of piece depending on Color
         private void ColorChanged()
         {
             switch(Color)
@@ -72,6 +71,7 @@ namespace Crazy_Checkers
             }
         }
 
+        // Handles Square Colour being changed
         private void SquareColorChanged()
         {
             switch(SquareColor)
@@ -93,6 +93,7 @@ namespace Crazy_Checkers
             }
         }
 
+        // Checks if the King has been changed
         private void KingChanged()
         {
             switch (King)
@@ -102,24 +103,7 @@ namespace Crazy_Checkers
                     break;
             }
         }
-
-        public bool isBlack()
-        {
-            if (Color == 0)
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool isRed()
-        {
-            if (Color == 1)
-            {
-                return true;
-            }
-            return false;
-        }
-
+        // checks if Position is blank
         public bool isBlank()
         {
             if (Color == 2)

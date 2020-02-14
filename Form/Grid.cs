@@ -16,16 +16,6 @@ namespace Crazy_Checkers
         // Stores each position so they can be accessed
         private Position[,] PositionArray;
 
-        // /* COMMENTS AREA
-        // We need to:
-        //     - set up a way to get the state of a piece selected
-        //     - set up a way to set the state of a piece
-
-        // We have done:
-        //     -     
-        
-        // */
-
         public Grid(uint colSize, uint rowSize)
         {
             // Adds dimesnions from parameters
